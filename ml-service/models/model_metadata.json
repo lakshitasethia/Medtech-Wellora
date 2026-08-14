@@ -1,0 +1,113 @@
+{
+  "served_model": "logistic_regression",
+  "trained_at": "2026-08-14T05:46:25+00:00",
+  "dataset": "UCI Heart Disease \u2014 Cleveland subset",
+  "n_records": 303,
+  "random_state": 42,
+  "test_size": 0.2,
+  "raw_feature_order": [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "ca",
+    "cp",
+    "restecg",
+    "slope",
+    "thal",
+    "sex",
+    "fbs",
+    "exang"
+  ],
+  "numeric_features": [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "ca"
+  ],
+  "categorical_features": [
+    "cp",
+    "restecg",
+    "slope",
+    "thal"
+  ],
+  "binary_features": [
+    "sex",
+    "fbs",
+    "exang"
+  ],
+  "transformed_feature_names": [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "ca",
+    "cp_1.0",
+    "cp_2.0",
+    "cp_3.0",
+    "cp_4.0",
+    "restecg_0.0",
+    "restecg_1.0",
+    "restecg_2.0",
+    "slope_1.0",
+    "slope_2.0",
+    "slope_3.0",
+    "thal_3.0",
+    "thal_6.0",
+    "thal_7.0",
+    "sex",
+    "fbs",
+    "exang"
+  ],
+  "feature_labels": {
+    "age": "Age",
+    "trestbps": "Resting blood pressure",
+    "chol": "Serum cholesterol",
+    "thalach": "Maximum heart rate achieved",
+    "oldpeak": "ST depression (exercise vs rest)",
+    "ca": "Major vessels coloured by fluoroscopy",
+    "sex": "Sex (male)",
+    "fbs": "Fasting blood sugar > 120 mg/dl",
+    "exang": "Exercise-induced angina",
+    "cp_1.0": "Chest pain: typical angina",
+    "cp_2.0": "Chest pain: atypical angina",
+    "cp_3.0": "Chest pain: non-anginal pain",
+    "cp_4.0": "Chest pain: asymptomatic",
+    "restecg_0.0": "Resting ECG: normal",
+    "restecg_1.0": "Resting ECG: ST-T wave abnormality",
+    "restecg_2.0": "Resting ECG: left ventricular hypertrophy",
+    "slope_1.0": "Peak exercise ST slope: upsloping",
+    "slope_2.0": "Peak exercise ST slope: flat",
+    "slope_3.0": "Peak exercise ST slope: downsloping",
+    "thal_3.0": "Thalassemia scan: normal",
+    "thal_6.0": "Thalassemia scan: fixed defect",
+    "thal_7.0": "Thalassemia scan: reversible defect"
+  },
+  "test_metrics": {
+    "logistic_regression": {
+      "accuracy": 0.8689,
+      "precision": 0.8125,
+      "recall": 0.9286,
+      "f1": 0.8667,
+      "roc_auc": 0.96
+    },
+    "random_forest": {
+      "accuracy": 0.8852,
+      "precision": 0.8387,
+      "recall": 0.9286,
+      "f1": 0.8814,
+      "roc_auc": 0.9513
+    }
+  },
+  "library_versions": {
+    "python": "3.9.6",
+    "scikit_learn": "1.6.1",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "joblib": "1.4.2"
+  }
+}

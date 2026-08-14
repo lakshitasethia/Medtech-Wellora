@@ -1,0 +1,19 @@
+# Wellora heart-risk service — production runtime.
+#
+# Versions are pinned EXACTLY, not with >= or ~=. A scikit-learn version
+# that differs from the one the model was pickled with will unpickle
+# without error and then predict differently. /health reports the match so
+# a drift shows up as a status rather than as silently wrong scores.
+#
+# The model in models/ was trained with the versions below. If you bump
+# any of them, re-run `python train.py` and redeploy both together.
+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+
+scikit-learn==1.6.1
+numpy==1.26.4
+pandas==2.2.3
+joblib==1.4.2
+scipy==1.13.1

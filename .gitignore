@@ -1,0 +1,63 @@
+# ──────────────────────────────────────────────────────────────
+# Secrets — never commit
+# ──────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ──────────────────────────────────────────────────────────────
+# Node / Vite frontend
+# ──────────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# ──────────────────────────────────────────────────────────────
+# Python ML service
+# ──────────────────────────────────────────────────────────────
+ml-service/.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# NOTE: ml-service/models/*.joblib is deliberately NOT ignored.
+# The trained model (8 KB) is committed so Render deploys the exact
+# artefact that was evaluated, rather than retraining at build time.
+
+# ──────────────────────────────────────────────────────────────
+# Logs
+# ──────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ──────────────────────────────────────────────────────────────
+# Editors / OS
+# ──────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ──────────────────────────────────────────────────────────────
+# Local tooling
+# ──────────────────────────────────────────────────────────────
+.claude/settings.local.json
