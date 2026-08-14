@@ -64,6 +64,7 @@ Access is enforced by **Postgres Row Level Security**, not by the client. The UI
 │   ├── profiles.sql        # links auth users to roles
 │   └── SETUP.md            # step-by-step database setup
 ├── ml-service/             # FastAPI heart-risk service (own README)
+├── render.yaml             # Render blueprint (must live at repo root)
 └── plan.md                 # phased implementation plan + progress log
 ```
 

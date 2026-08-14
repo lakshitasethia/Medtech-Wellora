@@ -28,7 +28,6 @@ ml-service/
 ├── train.py               training pipeline
 ├── requirements.txt       exact pins (see "Version pinning")
 ├── runtime.txt            python-3.11.9
-├── render.yaml            Render blueprint
 └── Makefile
 ```
 
@@ -137,7 +136,7 @@ Training provenance, dataset size, and evaluation metrics — the numbers to cit
 That is the failure mode you hit before. Three defences are in place:
 
 1. Exact pins in `requirements.txt`, matching the versions recorded in `models/model_metadata.json`.
-2. `runtime.txt` and `render.yaml` pin Python 3.11.9 — numpy 1.26.4 has no wheels for 3.13.
+2. `runtime.txt` and the root `render.yaml` pin Python 3.11.9 — numpy 1.26.4 has no wheels for 3.13.
 3. `/health` reports `version_match`, and `test_health_reports_loaded_model` fails the suite on a mismatch.
 
 **If you bump any pinned version, re-run `python train.py` and redeploy the model and the code together.**
@@ -149,7 +148,7 @@ That is the failure mode you hit before. Three defences are in place:
 The model artefact (8 KB) is committed, so no training happens at build time — builds stay fast and the deployed model is exactly the one you evaluated.
 
 1. Push the repo to GitHub.
-2. Render → **New → Blueprint** → select the repo. `render.yaml` sets `rootDir: ml-service`, the build and start commands, and `/health` as the health check.
+2. Render → **New → Blueprint** → select the repo. The blueprint lives at **`render.yaml` in the repository root** (Render only looks there by default); it sets `rootDir: ml-service`, the build and start commands, and `/health` as the health check.
 3. Set `ALLOWED_ORIGINS` to your deployed Wellora frontend URL.
 4. Put the resulting service URL in the frontend's `VITE_ML_API_URL`.
 

@@ -1,6 +1,7 @@
 # Wellora — Implementation Plan
 
-**Status:** ✅ Phase 0 complete and verified in-browser (14 Aug 2026). Phase 1 scaffolded, blocked on Supabase credentials.
+**Status:** ✅ Phases 0, 1, 2 and 2.4 complete and verified (14 Aug 2026). Database live, trained model wired in.
+**Remaining:** deploy the ML service to Render; Phase 3 differentiators (ambient risk ranking, unified timeline UI).
 **Audit date:** 12 August 2026
 
 ## Progress log
@@ -67,7 +68,7 @@
 
 **Bug caught by lint:** `stored = patient?.mlHeartRisk?.parameters ?? {}` minted a new object every render, feeding `params` → scoring effect → setState → render. That would have called the model in an infinite loop. Memoised.
 
-**Still outstanding:** the service runs locally only. Deploy to Render via `ml-service/render.yaml`, then set `VITE_ML_API_URL` to the deployed URL.
+**Still outstanding:** the service runs locally only. Deploy to Render via `render.yaml` (repo root), then set `VITE_ML_API_URL` to the deployed URL.
 
 ### ✅ ML service — complete (14 Aug 2026)
 Built in `ml-service/`. Logistic regression on the UCI Cleveland dataset: accuracy 0.869, recall 0.929, ROC-AUC 0.960, CV AUC 0.907 ± 0.019. Exact per-prediction log-odds explanations, self-verified at startup. FastAPI with `/predict`, `/health`, `/model-info`. 14 tests pass. Exact version pins + `version_match` health check. See `ml-service/README.md`.
