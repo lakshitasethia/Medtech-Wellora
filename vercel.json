@@ -6,7 +6,7 @@
 
   "rewrites": [
     {
-      "source": "/((?!assets/).*)",
+      "source": "/((?!assets/|favicon\\.svg|favicon\\.ico|robots\\.txt).*)",
       "destination": "/index.html"
     }
   ],
