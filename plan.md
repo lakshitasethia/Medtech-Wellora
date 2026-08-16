@@ -68,7 +68,14 @@
 
 **Bug caught by lint:** `stored = patient?.mlHeartRisk?.parameters ?? {}` minted a new object every render, feeding `params` → scoring effect → setState → render. That would have called the model in an infinite loop. Memoised.
 
-**Still outstanding:** the service runs locally only. Deploy to Render via `render.yaml` (repo root), then set `VITE_ML_API_URL` to the deployed URL.
+**Deployed (16 Aug 2026):** live at <https://wellora-ml.onrender.com>. `/health` reports `model_loaded: true`, `version_match: true`. Verified `/predict` externally — Eleanor Vance's feature vector returns 88% with exact per-prediction contributions.
+
+Deployment notes (three separate causes, in order):
+1. `render.yaml` was at `ml-service/render.yaml`; Render only looks at the repo root. Moved it.
+2. The blueprint then matched an **existing** `wellora-ml` service from an unrelated older repo (`lakshitasethia/Wellora`) instead of creating a new one — so it reported "Synced" while deploying the wrong codebase. Deleted the blueprint and the stale service.
+3. The fresh manual service was created without **Root Directory**, so `pip install -r requirements.txt` ran at the repo root and failed in 9.6s. Setting Root Directory to `ml-service` fixed it.
+
+Free tier spins down after inactivity; first request back takes ~50s, during which the modal correctly shows the amber fallback badge.
 
 ### ✅ ML service — complete (14 Aug 2026)
 Built in `ml-service/`. Logistic regression on the UCI Cleveland dataset: accuracy 0.869, recall 0.929, ROC-AUC 0.960, CV AUC 0.907 ± 0.019. Exact per-prediction log-odds explanations, self-verified at startup. FastAPI with `/predict`, `/health`, `/model-info`. 14 tests pass. Exact version pins + `version_match` health check. See `ml-service/README.md`.
