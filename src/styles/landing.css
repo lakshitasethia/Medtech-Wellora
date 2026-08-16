@@ -943,3 +943,39 @@
   .resource-card h3 { font-size: 1.1875rem; }
   .resource-card p  { font-size: 1.0625rem; }
 }
+
+/* ============================================================
+   HERO + CONTAINER — restored
+   These were lost when the old footer rules were stripped: the removal
+   matched an earlier "Footer" comment and took the whole type pass with
+   it. The later passes re-added the section overrides but not these, so
+   the hero silently reverted to its pre-pass sizing.
+   ============================================================ */
+.section-inner { max-width: 1280px; }
+
+.hero-subtitle {
+  font-size: 1.3125rem;        /* 21px — matches the section lead */
+  line-height: 1.65;
+  max-width: 54ch;
+}
+
+.hero-cta-button {
+  font-size: 1.4375rem;        /* 23px */
+  padding: 1.2rem 3.5rem;
+}
+
+.hero-pill-label   { font-size: 1.125rem; }   /* 18px */
+.hero-pill-icon-box { width: 64px; height: 64px; }
+.hero-pill-icon-box svg { width: 30px; height: 30px; }
+.hero-bottom-pills { gap: 4rem; }
+.hero-nav-link     { font-size: 1.0625rem; }  /* 17px */
+.section-eyebrow   { font-size: 0.875rem; }   /* 14px */
+
+.landing-page .hero-bottom-pills { padding-bottom: 3rem; }
+
+@media (max-width: 720px) {
+  .hero-subtitle   { font-size: 1.0625rem; }
+  .hero-cta-button { font-size: 1.15rem; padding: 0.95rem 2.4rem; }
+  .hero-pill-label { font-size: 1rem; }
+  .hero-bottom-pills { gap: 2rem; }
+}
