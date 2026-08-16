@@ -979,3 +979,57 @@
   .hero-pill-label { font-size: 1rem; }
   .hero-bottom-pills { gap: 2rem; }
 }
+
+/* ============================================================
+   GOOGLE SIGN-IN — login page
+   Follows Google's identity guidelines: white surface, their
+   four-colour mark unmodified, and the exact wording.
+   ============================================================ */
+.google-signin-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.4rem;
+  margin-bottom: 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: #ffffff;
+  font-size: 1rem;
+  font-weight: var(--fw-semi);
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(10, 25, 47, 0.08);
+}
+
+.google-signin-btn:hover:not(:disabled) {
+  box-shadow: 0 8px 22px rgba(10, 25, 47, 0.14);
+  transform: translateY(-1px);
+  border-color: var(--cyan-500);
+}
+
+.google-signin-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.google-signin-btn svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+  color: var(--slate-400);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-medium);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(10, 25, 47, 0.12);
+}
+
+.auth-divider span { white-space: nowrap; }

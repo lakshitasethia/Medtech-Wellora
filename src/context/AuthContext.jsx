@@ -80,13 +80,27 @@ export function AuthProvider({ children }) {
         hint: error.hint,
       });
 
-      setAuthError(
-        error.code === 'PGRST116'
-          ? `No profile row exists for this account (user id ${userId}). ` +
-            'Run supabase/profiles.sql, then sign in again.'
-          : `Could not read your profile: ${error.message}` +
-            (error.code ? ` [${error.code}]` : '')
-      );
+      if (error.code === 'PGRST116') {
+        // The account authenticated but is not attached to any hospital
+        // record. For a patient signing in with Google that means reception
+        // has not registered their email yet; for staff it means the profile
+        // row was never created. Both are the same fix from the user's side:
+        // someone at the hospital has to link them.
+        setAuthError(
+          'This account is not linked to a hospital record yet. ' +
+          'If you are a patient, ask reception to register the email you signed in with. ' +
+          'If you are staff, ask an administrator to set up your profile.'
+        );
+        // Leave no half-authenticated session behind — the user is signed in
+        // to Supabase but cannot reach anything, which is a confusing state
+        // to persist across reloads.
+        supabase.auth.signOut().catch(() => {});
+      } else {
+        setAuthError(
+          `Could not read your profile: ${error.message}` +
+          (error.code ? ` [${error.code}]` : '')
+        );
+      }
       setProfile(null);
       return null;
     }
@@ -155,6 +169,43 @@ export function AuthProvider({ children }) {
     return { ok: true, role: p.role };
   }, [fetchProfile, showToast, setMockRolePersisted]);
 
+  /**
+   * Google sign-in, used mainly by patients.
+   *
+   * A receptionist captures a patient's email at registration but cannot
+   * create their login — that needs the service_role key, which can never
+   * reach a browser. So the link is made from the signup side instead: the
+   * `on_auth_user_confirmed` trigger attaches a verified email to a matching
+   * unclaimed patient record and grants the patient role.
+   *
+   * Google matters specifically because it has already verified the address.
+   * Linking on an unverified email would let anyone claim a patient's record
+   * by signing up with their address.
+   *
+   * This redirects away from the page; the session is picked up by
+   * `detectSessionInUrl` on the way back, and `onAuthStateChange` then loads
+   * the profile as it would for any other sign-in.
+   */
+  const signInWithGoogle = useCallback(async () => {
+    setAuthError(null);
+
+    if (AUTH_MODE === 'mock') {
+      showToast('Google sign-in needs a live database — running in demo mode');
+      return { ok: false, error: 'Demo mode' };
+    }
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/login` },
+    });
+
+    if (error) {
+      setAuthError(error.message);
+      return { ok: false, error: error.message };
+    }
+    return { ok: true };
+  }, [showToast]);
+
   const signOut = useCallback(async () => {
     if (AUTH_MODE === 'live') await supabase.auth.signOut();
     setMockRolePersisted(null);
@@ -201,6 +252,7 @@ export function AuthProvider({ children }) {
     activePatientId,
     authError,
     signIn,
+    signInWithGoogle,
     signOut,
     switchRole,
     toastMessage,
@@ -210,7 +262,7 @@ export function AuthProvider({ children }) {
     logout: signOut,
   }), [
     isLoggedIn, loading, userRole, profile, session, displayName,
-    activePatientId, authError, signIn, signOut, switchRole,
+    activePatientId, authError, signIn, signInWithGoogle, signOut, switchRole,
     toastMessage, showToast,
   ]);
 
