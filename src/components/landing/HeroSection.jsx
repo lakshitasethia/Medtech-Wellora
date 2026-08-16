@@ -402,22 +402,47 @@ export default function HeroSection() {
 
       {/* ── Footer ──────────────────────────────────────────────────── */}
       <footer className="landing-footer">
-        <div className="section-inner landing-footer-inner">
-          <div>
-            <div className="landing-footer-brand">
-              <Activity style={{ width: '18px', height: '18px' }} />
-              <span>Wellora</span>
+        <div className="section-inner">
+          <div className="footer-top">
+            <div className="footer-brand-col">
+              <div className="landing-footer-brand">
+                <Activity style={{ width: '20px', height: '20px' }} />
+                <span>Wellora</span>
+              </div>
+              <p>
+                A unified hospital management system built on a single source of
+                truth EMR, with role-based access enforced at the database layer
+                and explainable cardiac risk assessment.
+              </p>
             </div>
-            <p>
-              A final-year demonstration project. Patient data is synthetic and the risk
-              model is not clinically validated — it must not be used for patient care.
-            </p>
+
+            <nav className="footer-col" aria-label="Platform">
+              <h4>Platform</h4>
+              <a href="#healthcare" onClick={(e) => scrollToSection(e, 'healthcare')}>Healthcare</a>
+              <a href="#analytics" onClick={(e) => scrollToSection(e, 'analytics')}>Analytics</a>
+              <a href="#resources" onClick={(e) => scrollToSection(e, 'resources')}>Resources</a>
+            </nav>
+
+            <nav className="footer-col" aria-label="Documentation">
+              <h4>Documentation</h4>
+              <a href={REPO_URL} target="_blank" rel="noopener noreferrer">Source repository</a>
+              <a href={`${REPO_URL}/tree/main/ml-service`} target="_blank" rel="noopener noreferrer">Model card</a>
+              <a href={`${REPO_URL}/tree/main/supabase`} target="_blank" rel="noopener noreferrer">Schema &amp; security</a>
+            </nav>
+
+            <nav className="footer-col" aria-label="Services">
+              <h4>Services</h4>
+              <a href={`${ML_API_URL}/docs`} target="_blank" rel="noopener noreferrer">Risk model API</a>
+              <a href={`${ML_API_URL}/health`} target="_blank" rel="noopener noreferrer">Service status</a>
+            </nav>
           </div>
-          <div className="landing-footer-links">
-            <a href="#healthcare" onClick={(e) => scrollToSection(e, 'healthcare')}>Healthcare</a>
-            <a href="#analytics" onClick={(e) => scrollToSection(e, 'analytics')}>Analytics</a>
-            <a href="#resources" onClick={(e) => scrollToSection(e, 'resources')}>Resources</a>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+
+          <div className="footer-bottom">
+            <span>&copy; 2026 Wellora. Final-year demonstration project.</span>
+            <span className="footer-disclaimer">
+              Patient data is synthetic. The risk model is not clinically validated
+              and must not be used for patient care.
+            </span>
           </div>
         </div>
       </footer>

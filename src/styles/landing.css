@@ -663,179 +663,6 @@
   margin-top: 0.25rem;
 }
 
-/* ---------- Footer ---------- */
-.landing-footer {
-  padding: 2.5rem 0;
-  background: rgba(10, 25, 47, 0.96);
-  border-top: 1px solid rgba(6, 182, 212, 0.22);
-}
-
-.landing-footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.landing-footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--fs-base);
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.landing-footer-brand svg { color: var(--cyan-400); }
-
-.landing-footer p {
-  font-size: var(--fs-xs);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 52ch;
-}
-
-.landing-footer-links {
-  display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.landing-footer-links a {
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.62);
-  text-decoration: none;
-  transition: var(--transition-fast);
-}
-
-.landing-footer-links a:hover { color: var(--cyan-300); }
-
-@media (max-width: 720px) {
-  .landing-section { padding: var(--sp-7) 0; }
-  .section-inner { padding: 0 1.25rem; }
-  .hero-top-nav { padding: 0.9rem 1.25rem; }
-  .hero-nav-links { display: none; }
-}
-
-/* The scroll cue sits below the pill row, so reclaim some of the original
-   bottom padding to keep the hero balanced within one viewport. */
-.landing-page .hero-bottom-pills { padding-bottom: 1.25rem; }
-
-/* ============================================================
-   LANDING TYPE & DENSITY PASS
-   Scoped entirely to landing-only classes. The shared type scale in
-   tokens.css is sized for dense clinical UI, where information density
-   matters; a marketing page needs larger copy and a tighter
-   text-to-whitespace ratio. These overrides live here rather than in
-   tokens.css so the dashboards are untouched.
-   ============================================================ */
-
-/* Wider measure — the 1180px container left too much dead margin */
-.section-inner { max-width: 1280px; }
-
-/* ---------- Hero ---------- */
-.hero-subtitle {
-  font-size: 1.25rem;          /* 20px, was 18 */
-  line-height: 1.6;
-  max-width: 52ch;
-}
-
-.hero-cta-button {
-  font-size: 1.375rem;
-  padding: 1.15rem 3.4rem;
-}
-
-.hero-pill-label { font-size: 1.0625rem; }   /* 17px, was 16 */
-.hero-pill-icon-box { width: 62px; height: 62px; }
-.hero-nav-link { font-size: 1.0625rem; }
-
-/* The cue is gone, so the pill row no longer needs to make room for it */
-.landing-page .hero-bottom-pills { padding-bottom: 3rem; }
-
-/* ---------- Section headings ---------- */
-.section-eyebrow { font-size: 0.8125rem; }   /* 13px, was 11 */
-
-.section-lead {
-  font-size: 1.25rem;          /* 20px, was 18 */
-  line-height: 1.65;
-  max-width: 68ch;
-  margin-bottom: var(--sp-7);  /* was --sp-8; the gap read as a break */
-}
-
-/* ---------- Pillar cards ---------- */
-.pillar-grid { margin-bottom: var(--sp-7); }
-
-.pillar-card { padding: var(--sp-6); }
-
-.pillar-card h3 {
-  font-size: 1.3125rem;        /* 21px, was 18 */
-  line-height: 1.3;
-  margin-bottom: var(--sp-3);
-}
-
-.pillar-card p {
-  font-size: 1.0625rem;        /* 17px, was 14 — the main offender */
-  line-height: 1.6;
-}
-
-.pillar-icon { width: 52px; height: 52px; }
-.pillar-icon svg { width: 25px; height: 25px; }
-
-/* ---------- Role strip ---------- */
-.role-strip { padding: var(--sp-6); }
-
-.role-strip-head {
-  font-size: 0.8125rem;
-  margin-bottom: var(--sp-5);
-}
-
-.role-grid { gap: var(--sp-5); }
-
-.role-card strong { font-size: 1.0625rem; }  /* 17px, was 14 */
-.role-card span   { font-size: 0.9375rem; line-height: 1.55; }  /* 15px, was 13 */
-.role-card svg    { width: 20px; height: 20px; }
-
-/* ---------- Analytics ---------- */
-.analytics-subhead { font-size: 1.5rem; margin-bottom: var(--sp-4); }
-
-.analytics-copy p {
-  font-size: 1.0625rem;
-  line-height: 1.65;
-}
-
-.model-stats strong { font-size: 1.75rem; }
-.model-stats span   { font-size: 0.75rem; }
-.model-stats div    { padding: var(--sp-4) var(--sp-2); }
-
-.analytics-note { font-size: 0.9375rem !important; line-height: 1.6; }
-
-/* ---------- Risk preview panel ---------- */
-.risk-preview { padding: var(--sp-6); }
-.risk-preview-eyebrow  { font-size: 0.75rem; }
-.risk-preview-patient  { font-size: 1.0625rem; }
-.risk-preview-score strong { font-size: 2.5rem; }
-.risk-preview-score span   { font-size: 0.75rem; }
-.risk-preview-factors li   { font-size: 0.9375rem; }
-.rp-detail   { font-size: 0.875rem; }
-.rp-bar-head { font-size: 0.8125rem; }
-.risk-preview-foot { font-size: 0.8125rem; line-height: 1.6; }
-
-/* ---------- Resources ---------- */
-.resource-rail { grid-auto-columns: minmax(288px, 1fr); }
-.resource-card { padding: var(--sp-6); }
-.resource-card h3 { font-size: 1.1875rem; margin-bottom: var(--sp-2); }
-.resource-card p  { font-size: 1rem; line-height: 1.6; }
-.resource-icon { width: 46px; height: 46px; }
-.rail-hint { font-size: 0.875rem; }
-
-/* ---------- Footer ---------- */
-.landing-footer p { font-size: 0.9375rem; line-height: 1.65; }
-.landing-footer-brand { font-size: 1.1875rem; }
-.landing-footer-links a { font-size: 1rem; }
-
 /* ---------- Small screens: hold the gains, drop the extremes ---------- */
 @media (max-width: 720px) {
   .hero-subtitle   { font-size: 1.0625rem; }
@@ -843,4 +670,162 @@
   .section-lead    { font-size: 1.0625rem; }
   .pillar-card h3  { font-size: 1.1875rem; }
   .pillar-card p   { font-size: 1rem; }
+}
+
+/* ============================================================
+   RISK PREVIEW — readability pass
+   The factor list was a 36px numeric column against 14px detail text
+   with no row rhythm, which is what made it read as cramped. Rows now
+   have real height, a separating hairline, and type large enough to
+   scan at a glance.
+   ============================================================ */
+.risk-preview { padding: var(--sp-6) var(--sp-6) var(--sp-5); }
+
+.risk-preview-head {
+  padding-bottom: var(--sp-4);
+  margin-bottom: var(--sp-2);
+  align-items: center;
+}
+
+.risk-preview-eyebrow { font-size: 0.8125rem; letter-spacing: 0.06em; }
+.risk-preview-patient { font-size: 1.1875rem; margin-top: var(--sp-1); }
+.risk-preview-score strong { font-size: 3rem; letter-spacing: -0.03em; }
+.risk-preview-score span   { font-size: 0.8125rem; letter-spacing: 0.05em; }
+
+.risk-preview-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--sp-5);
+}
+
+.risk-preview-factors li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: var(--sp-4);
+  row-gap: 0.15rem;
+  align-items: baseline;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+  font-size: 1.0625rem;
+}
+
+.risk-preview-factors li:last-child { border-bottom: none; }
+
+.rp-points {
+  font-size: 1.0625rem;
+  font-weight: var(--fw-black);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.rp-label { font-size: 1.0625rem; font-weight: var(--fw-bold); }
+
+.rp-detail {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--slate-500);
+}
+
+/* Breakdown bars — give each row height and a readable label */
+.risk-preview-breakdown {
+  gap: var(--sp-4);
+  padding-top: var(--sp-5);
+}
+
+.rp-bar-head {
+  font-size: 0.9375rem;
+  margin-bottom: var(--sp-2);
+}
+
+.rp-bar-track { height: 7px; }
+
+.risk-preview-foot {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   FOOTER — grouped columns, muted, closer to a standard
+   healthcare-site footer than a single dense bar
+   ============================================================ */
+.landing-footer {
+  padding: var(--sp-8) 0 var(--sp-5);
+  background: rgba(10, 25, 47, 0.97);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1fr;
+  gap: var(--sp-7);
+  padding-bottom: var(--sp-7);
+}
+
+.footer-brand-col p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 42ch;
+}
+
+.landing-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 1.25rem;
+  font-weight: var(--fw-black);
+  color: #fff;
+  margin-bottom: var(--sp-3);
+  letter-spacing: var(--ls-tight);
+}
+
+.landing-footer-brand svg { color: var(--cyan-400); }
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.footer-col h4 {
+  font-size: 0.75rem;
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  margin-bottom: var(--sp-1);
+}
+
+.footer-col a {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  width: fit-content;
+}
+
+.footer-col a:hover { color: var(--cyan-300); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.4);
+  flex-wrap: wrap;
+}
+
+.footer-disclaimer { max-width: 60ch; text-align: right; }
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+  .footer-brand-col { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; gap: var(--sp-2); }
+  .footer-disclaimer { text-align: left; }
 }
