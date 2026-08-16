@@ -116,7 +116,7 @@ export default function MLRiskModal({ patientId, isOpen, onClose }) {
           justifyContent: 'space-between',
           borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
         }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <h2 style={{ fontSize: 'var(--fs-lg)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <Activity style={{ width: '22px', height: '22px' }} />
             Heart Risk Assessment — {patient.name}
           </h2>
@@ -126,7 +126,7 @@ export default function MLRiskModal({ patientId, isOpen, onClose }) {
         <div className="modal-body">
           <div className="ml-modal-grid">
             <div>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '1rem' }}>
                 Clinical Feature Parameters
               </h3>
 
@@ -170,7 +170,7 @@ export default function MLRiskModal({ patientId, isOpen, onClose }) {
             </div>
 
             <div className="risk-gauge-container">
-              <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.75rem' }}>
                 {scoring ? 'Scoring…' : 'Model Risk Estimate'}
               </h3>
 

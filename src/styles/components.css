@@ -6,7 +6,7 @@
   gap: 0.5rem;
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-pill);
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -64,7 +64,7 @@
 .sub-nav-tab-btn {
   padding: 0.5rem 1.1rem;
   border-radius: var(--radius-pill);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   border: none;
   background: transparent;
@@ -137,7 +137,7 @@
   border-radius: var(--radius-pill);
   border: 1px solid var(--cyan-500);
   box-shadow: 0 10px 25px rgba(10, 25, 47, 0.3);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
 }
 
@@ -192,14 +192,14 @@
 }
 
 .brand-name {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--navy-900);
 }
 
 .brand-tagline {
-  font-size: 0.68rem;
+  font-size: var(--fs-2xs);
   font-weight: 600;
   color: var(--teal-700);
   letter-spacing: 0.02em;
@@ -214,7 +214,7 @@
   border-radius: var(--radius-pill);
   background: rgba(6, 182, 212, 0.10);
   border: 1px solid rgba(6, 182, 212, 0.35);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--teal-700);
   white-space: nowrap;
@@ -265,7 +265,7 @@
   border-radius: var(--radius-pill);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.75);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--slate-900);
   outline: none;
   transition: var(--transition-fast);
@@ -306,7 +306,7 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.02em;
   flex-shrink: 0;
@@ -320,14 +320,14 @@
 }
 
 .user-name {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--navy-900);
   white-space: nowrap;
 }
 
 .user-role-title {
-  font-size: 0.68rem;
+  font-size: var(--fs-2xs);
   font-weight: 500;
   color: var(--slate-500);
   white-space: nowrap;
@@ -340,8 +340,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.5rem 1.85rem;
+  gap: var(--sp-5);
+  padding: var(--sp-6) var(--sp-6);
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 55%, var(--teal-700) 160%);
   color: #ffffff;
@@ -367,20 +367,22 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: var(--sp-2);
 }
 
 .header-banner-text h1 {
-  font-size: 1.65rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-hero);
+  line-height: var(--lh-tight);
   color: #ffffff;
 }
 
 .header-banner-text p {
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.72);
-  font-weight: 500;
+  font-size: var(--fs-base);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
 }
 
 .role-badge-pill {
@@ -390,7 +392,7 @@
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -415,8 +417,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem 1.4rem;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
   border-radius: var(--radius-md);
   background: var(--glass-bg-card);
   backdrop-filter: blur(16px);
@@ -435,28 +437,28 @@
 .metric-info {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: var(--sp-2);
   min-width: 0;
 }
 
 .metric-label {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
   color: var(--slate-500);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-wide);
 }
 
 .metric-value {
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-tight);
   color: var(--navy-900);
-  line-height: 1.1;
+  line-height: var(--lh-tight);
 }
 
 .metric-trend {
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--slate-500);
 }
@@ -481,7 +483,7 @@
    GLASS CARDS & DATA TABLES
    ============================================================ */
 .glass-card {
-  padding: 1.5rem 1.65rem;
+  padding: var(--sp-6);
   border-radius: var(--radius-lg);
   background: var(--glass-bg-card);
   backdrop-filter: blur(18px);
@@ -494,28 +496,29 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
   flex-wrap: wrap;
 }
 
 .card-title {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  gap: var(--sp-2);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
   color: var(--navy-900);
 }
 
 .card-title svg { color: var(--teal-700); }
 
 .card-subtitle {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--slate-500);
-  font-weight: 500;
-  margin-top: 0.25rem;
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  margin-top: var(--sp-1);
 }
 
 .table-responsive {
@@ -530,8 +533,8 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 0.85rem;
-  min-width: 720px;
+  font-size: var(--fs-sm);
+  min-width: 760px;
 }
 
 .custom-table thead th {
@@ -540,7 +543,7 @@
   z-index: 2;
   padding: 0.75rem 1rem;
   text-align: left;
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -552,7 +555,7 @@
 }
 
 .custom-table tbody td {
-  padding: 0.85rem 1rem;
+  padding: var(--sp-4) var(--sp-4);
   border-bottom: 1px solid rgba(226, 232, 240, 0.7);
   color: var(--slate-700);
   vertical-align: middle;
@@ -579,7 +582,7 @@
   gap: 0.35rem;
   padding: 0.28rem 0.7rem;
   border-radius: var(--radius-pill);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   line-height: 1.4;
   white-space: nowrap;
@@ -621,7 +624,7 @@
 }
 
 .form-label {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--slate-700);
   letter-spacing: 0.01em;
@@ -635,7 +638,7 @@
   border-radius: var(--radius-md);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.8);
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--slate-900);
   outline: none;
   transition: var(--transition-fast);
@@ -694,7 +697,7 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -740,7 +743,7 @@
 }
 
 .bed-number {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -748,7 +751,7 @@
 }
 
 .bed-patient-name {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 700;
   color: var(--navy-900);
   line-height: 1.3;
@@ -830,14 +833,14 @@
 }
 
 .risk-percentage {
-  font-size: 2.5rem;
+  font-size: var(--fs-2xl);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1;
 }
 
 .risk-level-tag {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -866,13 +869,13 @@
 @media (max-width: 768px) {
   .metrics-grid { grid-template-columns: 1fr; }
   .glass-card { padding: 1.15rem 1rem; }
-  .header-banner-text h1 { font-size: 1.3rem; }
+  .header-banner-text h1 { font-size: var(--fs-lg); }
   .user-info { display: none; }
   .modal-body { padding: 1.15rem 1rem; }
   .modal-footer { padding: 0.85rem 1rem; }
   .bed-map-grid { grid-template-columns: 1fr 1fr; }
   .risk-circle-wrapper { width: 150px; height: 150px; }
-  .risk-percentage { font-size: 2rem; }
+  .risk-percentage { font-size: var(--fs-2xl); }
   .sub-nav-tabs { overflow-x: auto; padding-bottom: 0.65rem; }
   .sub-nav-tab-btn { white-space: nowrap; }
 }
@@ -902,7 +905,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--slate-500);
 }
@@ -955,14 +958,14 @@
   background: rgba(255, 255, 255, 0.6);
   border: 1px dashed var(--slate-200);
   color: var(--slate-600);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .state-panel strong {
   display: block;
   color: var(--navy-900);
   margin-bottom: 0.2rem;
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
 }
 
 .state-panel p { line-height: 1.5; }
@@ -982,7 +985,7 @@
 .state-panel-error strong { color: var(--risk-high); }
 .state-hint {
   margin-top: 0.35rem;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   opacity: 0.85;
   font-style: italic;
 }
@@ -994,7 +997,7 @@
   gap: 0.4rem;
   padding: 0.28rem 0.7rem;
   border-radius: var(--radius-pill);
-  font-size: 0.68rem;
+  font-size: var(--fs-2xs);
   font-weight: 700;
   white-space: nowrap;
   border: 1px solid transparent;
@@ -1026,7 +1029,7 @@
 .rx-check {
   padding: 0.85rem 1rem;
   border-radius: var(--radius-md);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 1.5;
   margin-bottom: 1.25rem;
@@ -1057,7 +1060,7 @@
   border-radius: var(--radius-pill);
   border: 1px solid var(--slate-200);
   background: rgba(255, 255, 255, 0.85);
-  font-size: 0.65rem;
+  font-size: var(--fs-2xs);
   font-weight: 700;
   color: var(--slate-600);
   cursor: pointer;
@@ -1081,7 +1084,7 @@
   border-radius: 8px;
   border: none;
   background: transparent;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--slate-700);
   cursor: pointer;
@@ -1095,7 +1098,7 @@
   border-radius: var(--radius-md);
   background: rgba(6, 182, 212, 0.08);
   border: 1px solid rgba(6, 182, 212, 0.22);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--teal-700);
   line-height: 1.45;
@@ -1149,7 +1152,7 @@
 .model-source {
   width: 100%;
   text-align: left;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   line-height: 1.45;
   padding: 0.6rem 0.75rem;
   border-radius: var(--radius-md);
@@ -1172,7 +1175,7 @@
 .risk-drivers {
   width: 100%;
   text-align: left;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   background: rgba(255, 255, 255, 0.7);
   padding: 0.85rem;
   border-radius: var(--radius-md);
@@ -1201,7 +1204,7 @@
   margin-left: 0.4rem;
   padding: 0.05rem 0.4rem;
   border-radius: var(--radius-pill);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -1213,7 +1216,7 @@
   margin-top: 0.55rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--slate-200);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   color: var(--slate-500);
   font-style: italic;
   line-height: 1.45;
@@ -1236,7 +1239,7 @@
   border-radius: var(--radius-pill);
   border: 1px solid var(--slate-200);
   background: rgba(255, 255, 255, 0.7);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--slate-600);
   cursor: pointer;
@@ -1254,7 +1257,7 @@
 .timeline-day { margin-bottom: 0.5rem; }
 
 .timeline-day-heading {
-  font-size: 0.68rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1316,7 +1319,7 @@
 }
 
 .timeline-type {
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -1324,7 +1327,7 @@
 }
 
 .timeline-time {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--slate-400);
   font-variant-numeric: tabular-nums;
@@ -1332,7 +1335,7 @@
 }
 
 .timeline-summary {
-  font-size: 0.86rem;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   color: var(--navy-900);
   margin-bottom: 0.4rem;
@@ -1342,7 +1345,7 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   color: var(--slate-500);
   font-weight: 500;
 }
@@ -1350,7 +1353,7 @@
 .timeline-role {
   padding: 0.1rem 0.5rem;
   border-radius: var(--radius-pill);
-  font-size: 0.65rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1381,7 +1384,7 @@
 }
 
 .timeline-details summary {
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--teal-700);
   cursor: pointer;
@@ -1392,7 +1395,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.25rem 0.75rem;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .timeline-details dt {
@@ -1434,7 +1437,7 @@
   border: none;
   border-radius: var(--radius-pill);
   background: transparent;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--slate-600);
   cursor: pointer;
@@ -1492,7 +1495,7 @@
 }
 
 .rank-num {
-  font-size: 1.05rem;
+  font-size: var(--fs-base);
   font-weight: 800;
   color: var(--slate-400);
   font-variant-numeric: tabular-nums;
@@ -1502,7 +1505,7 @@
   display: inline-flex;
   align-items: center;
   gap: 1px;
-  font-size: 0.62rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   padding: 0.05rem 0.3rem;
   border-radius: var(--radius-pill);
@@ -1512,7 +1515,7 @@
 .rank-move.down { background: var(--risk-low-bg);  color: var(--risk-low); }
 
 .worklist-name {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 700;
   color: var(--navy-900);
   display: flex;
@@ -1522,20 +1525,20 @@
 
 .worklist-meta,
 .worklist-conditions {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--slate-500);
 }
 
 .worklist-conditions { margin-top: 0.2rem; }
 
-.worklist-vitals { font-size: 0.78rem; color: var(--slate-700); line-height: 1.45; }
-.worklist-vitals .muted { color: var(--slate-400); font-size: 0.72rem; }
+.worklist-vitals { font-size: var(--fs-xs); color: var(--slate-700); line-height: 1.45; }
+.worklist-vitals .muted { color: var(--slate-400); font-size: var(--fs-xs); }
 
 .worklist-score { text-align: center; }
 
 .score-value {
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   font-weight: 800;
   color: var(--navy-900);
   line-height: 1;
@@ -1543,7 +1546,7 @@
 }
 
 .score-band {
-  font-size: 0.62rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1573,7 +1576,7 @@
 
 .worklist-actions { display: flex; gap: 0.35rem; flex-wrap: wrap; justify-content: flex-end; }
 
-.why-btn { padding: 0.3rem 0.7rem; font-size: 0.72rem; }
+.why-btn { padding: 0.3rem 0.7rem; font-size: var(--fs-xs); }
 
 .worklist-explain {
   grid-column: 1 / -1;
@@ -1585,7 +1588,7 @@
 }
 
 .explain-head {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 800;
   color: var(--navy-900);
   margin-bottom: 0.6rem;
@@ -1604,7 +1607,7 @@
   grid-template-columns: 44px 190px 1fr;
   gap: 0.6rem;
   align-items: baseline;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .factor-points {
@@ -1623,7 +1626,7 @@
   gap: 0.75rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--slate-200);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--slate-600);
 }
 
@@ -1631,7 +1634,7 @@
 
 .explain-note {
   margin-top: 0.5rem;
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-style: italic;
   color: var(--slate-500);
   line-height: 1.45;
@@ -1644,3 +1647,34 @@
   .explain-factors li { grid-template-columns: 40px 1fr; }
   .explain-factors .factor-detail { grid-column: 2; }
 }
+
+/* Inline icons that replaced emoji glyphs — sized to sit on the text baseline */
+.trend-icon,
+.badge-icon,
+.rx-check-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  vertical-align: -2px;
+}
+
+.metric-trend,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.rx-check-icon { width: 15px; height: 15px; vertical-align: -3px; }
+
+/* Status dot — replaces the "●" character with a real shape */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.sync-pill { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.rail-hint { display: inline-flex; align-items: center; gap: var(--sp-1); }

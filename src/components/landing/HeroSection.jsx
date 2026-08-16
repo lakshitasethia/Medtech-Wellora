@@ -2,9 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Activity, ArrowUpRight, BookOpen, Calendar, ClipboardList, Database, FileText,
-  GitBranch, Layers, RefreshCw, ShieldCheck, Stethoscope, TrendingUp, Users, Zap,
+  ArrowRight, GitBranch, Layers, RefreshCw, ShieldCheck, Stethoscope, TrendingUp, Users, Zap,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useLandingAnimations } from './useLandingAnimations';
 import { HOME_FOR_ROLE } from '../../routes/guards';
 
 const REPO_URL = 'https://github.com/lakshitasethia/Medtech-Wellora';
@@ -89,6 +90,8 @@ export default function HeroSection() {
 
   const dashboardPath = HOME_FOR_ROLE[userRole] ?? '/';
 
+  useLandingAnimations();
+
   // Signed-in visitors reach this page via the navbar logo, so the primary
   // action is "go back", not "sign in".
   const goToLogin = () =>
@@ -128,7 +131,7 @@ export default function HeroSection() {
           }}>
             <Activity style={{ width: '26px', height: '26px', stroke: '#ffffff' }} />
           </div>
-          <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--navy-900)', letterSpacing: '-0.02em' }}>
+          <span style={{ fontSize: 'var(--fs-lg)', fontWeight: 800, color: 'var(--navy-900)', letterSpacing: '-0.02em' }}>
             Wellora
           </span>
         </div>
@@ -147,7 +150,7 @@ export default function HeroSection() {
               </span>
               <button
                 className="btn-pill btn-pill-primary"
-                style={{ padding: '0.55rem 1.4rem', fontSize: '0.88rem' }}
+                style={{ padding: '0.55rem 1.4rem', fontSize: 'var(--fs-sm)' }}
                 onClick={() => navigate(dashboardPath)}
               >
                 Back to dashboard
@@ -164,7 +167,7 @@ export default function HeroSection() {
               </button>
               <button
                 className="btn-pill btn-pill-primary"
-                style={{ padding: '0.55rem 1.4rem', fontSize: '0.88rem' }}
+                style={{ padding: '0.55rem 1.4rem', fontSize: 'var(--fs-sm)' }}
                 onClick={() => navigate('/login')}
               >
                 Get Started
@@ -177,14 +180,15 @@ export default function HeroSection() {
       {/* ── Hero: unchanged, first viewport ─────────────────────────── */}
       <div className="hero-landing-container">
         <main className="hero-center-content">
-          <h1 className="hero-title">Healthcare, Reimagined.</h1>
+          <h1 className="hero-title" data-anim="hero-title">Healthcare, Reimagined.</h1>
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle" data-anim="hero-sub">
             Built on a Single Source of Truth EMR architecture. Unified patient records, real-time clinical care workflows, and ML heart disease risk intelligence for modern healthcare systems.
           </p>
 
           <button
             className="hero-cta-button"
+            data-anim="hero-cta"
             onClick={() => goToLogin()}
           >
             {isLoggedIn ? 'Go to my dashboard' : 'Get Started'}
@@ -192,21 +196,21 @@ export default function HeroSection() {
         </main>
 
         <footer className="hero-bottom-pills">
-          <div className="hero-pill-feature" onClick={() => goToLogin()}>
+          <div className="hero-pill-feature" data-anim="hero-pill" onClick={() => goToLogin()}>
             <div className="hero-pill-icon-box">
               <Calendar style={{ width: '28px', height: '28px' }} />
             </div>
             <span className="hero-pill-label">Appointments</span>
           </div>
 
-          <div className="hero-pill-feature" onClick={() => goToLogin()}>
+          <div className="hero-pill-feature" data-anim="hero-pill" onClick={() => goToLogin()}>
             <div className="hero-pill-icon-box">
               <FileText style={{ width: '28px', height: '28px' }} />
             </div>
             <span className="hero-pill-label">Patient Records</span>
           </div>
 
-          <div className="hero-pill-feature" onClick={() => goToLogin()}>
+          <div className="hero-pill-feature" data-anim="hero-pill" onClick={() => goToLogin()}>
             <div className="hero-pill-icon-box">
               <TrendingUp style={{ width: '28px', height: '28px' }} />
             </div>
@@ -216,6 +220,7 @@ export default function HeroSection() {
 
         <a
           className="scroll-cue"
+          data-anim="scroll-cue"
           href="#healthcare"
           onClick={(e) => scrollToSection(e, 'healthcare')}
           aria-label="Scroll to learn more"
@@ -226,18 +231,18 @@ export default function HeroSection() {
       </div>
 
       {/* ── Healthcare ──────────────────────────────────────────────── */}
-      <section id="healthcare" className="landing-section">
+      <section data-anim="section" id="healthcare" className="landing-section">
         <div className="section-inner">
-          <span className="section-eyebrow">The platform</span>
-          <h2 className="section-title">One record. Every role. No fragments.</h2>
-          <p className="section-lead">
+          <span className="section-eyebrow" data-anim="rise">The platform</span>
+          <h2 className="section-title" data-anim="rise">One record. Every role. No fragments.</h2>
+          <p className="section-lead" data-anim="rise">
             Most hospital systems keep a separate copy of the patient per department, then
             spend enormous effort reconciling them. Wellora inverts that: a single unified
             record, with each role seeing the slice their permissions allow — enforced in
             the database, not in the interface.
           </p>
 
-          <div className="pillar-grid">
+          <div className="pillar-grid" data-anim="rise">
             <article className="pillar-card">
               <div className="pillar-icon"><Database style={{ width: '22px', height: '22px' }} /></div>
               <h3>Single Source of Truth EMR</h3>
@@ -270,7 +275,7 @@ export default function HeroSection() {
             </article>
           </div>
 
-          <div className="role-strip">
+          <div className="role-strip" data-anim="rise">
             <div className="role-strip-head">Five roles, one underlying record</div>
             <div className="role-grid">
               {ROLES.map(({ icon: Icon, name, line }) => (
@@ -288,18 +293,18 @@ export default function HeroSection() {
       </section>
 
       {/* ── Analytics ───────────────────────────────────────────────── */}
-      <section id="analytics" className="landing-section landing-section-alt">
+      <section data-anim="section" id="analytics" className="landing-section landing-section-alt">
         <div className="section-inner">
-          <span className="section-eyebrow">Clinical intelligence</span>
-          <h2 className="section-title">Risk you can interrogate, not just read.</h2>
-          <p className="section-lead">
+          <span className="section-eyebrow" data-anim="rise">Clinical intelligence</span>
+          <h2 className="section-title" data-anim="rise">Risk you can interrogate, not just read.</h2>
+          <p className="section-lead" data-anim="rise">
             Documented override rates for clinical decision-support alerts run between 49%
             and 96% — clinicians dismiss them because they interrupt. Wellora takes the
             opposite approach: risk determines the <em>order</em> of the worklist, so the
             patient who needs attention rises into view instead of blocking the screen.
           </p>
 
-          <div className="analytics-layout">
+          <div className="analytics-layout" data-anim="rise">
             <div className="analytics-copy">
               <h3 className="analytics-subhead">A model that shows its working</h3>
               <p>
@@ -377,15 +382,15 @@ export default function HeroSection() {
       </section>
 
       {/* ── Resources ───────────────────────────────────────────────── */}
-      <section id="resources" className="landing-section">
+      <section data-anim="section" id="resources" className="landing-section">
         <div className="section-inner">
-          <span className="section-eyebrow">Resources</span>
-          <h2 className="section-title">Documentation &amp; source</h2>
-          <p className="section-lead">
+          <span className="section-eyebrow" data-anim="rise">Resources</span>
+          <h2 className="section-title" data-anim="rise">Documentation &amp; source</h2>
+          <p className="section-lead" data-anim="rise">
             Everything is documented, including the parts that don&rsquo;t work yet.
           </p>
 
-          <div className="resource-rail" role="list">
+          <div className="resource-rail" data-anim="rise" role="list">
             {RESOURCES.map(({ icon: Icon, title, line, href }) => (
               <a
                 className="resource-card"
@@ -401,7 +406,7 @@ export default function HeroSection() {
               </a>
             ))}
           </div>
-          <p className="rail-hint">Scroll for more →</p>
+          <p className="rail-hint">Scroll for more <ArrowRight style={{ width: '13px', height: '13px' }} /></p>
         </div>
       </section>
 

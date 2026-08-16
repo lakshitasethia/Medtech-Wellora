@@ -31,7 +31,7 @@
 }
 
 .hero-nav-link {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 500;
   color: var(--slate-700);
   text-decoration: none;
@@ -54,24 +54,24 @@
 }
 
 .hero-title {
-  font-size: 4.2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-hero);
+  line-height: var(--lh-hero);
   color: #4A90A4;
   background: linear-gradient(135deg, #38BDF8 0%, #0D9488 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--sp-5);
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
-  font-weight: 500;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
   color: var(--slate-600);
-  max-width: 620px;
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
+  max-width: 46ch;
+  line-height: var(--lh-normal);
+  margin-bottom: var(--sp-7);
 }
 
 .hero-cta-button {
@@ -80,7 +80,7 @@
   justify-content: center;
   padding: 1.1rem 3.2rem;
   border-radius: var(--radius-pill);
-  font-size: 1.4rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(207, 250, 254, 0.9) 100%);
   color: var(--navy-900);
@@ -133,7 +133,7 @@
 }
 
 .hero-pill-label {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   color: var(--slate-700);
 }
@@ -186,7 +186,7 @@
   border-radius: var(--radius-pill);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.75);
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   color: var(--slate-900);
   outline: none;
   margin-bottom: 1.1rem;
@@ -214,7 +214,7 @@
   border: none;
   background: transparent;
   border-radius: var(--radius-pill);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--slate-600);
   cursor: pointer;
@@ -274,7 +274,7 @@
 }
 
 .scroll-cue-label {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -286,7 +286,7 @@
 
 /* ---------- Section scaffolding ---------- */
 .landing-section {
-  padding: 5rem 0;
+  padding: var(--sp-9) 0;
   /* The page background is a fixed photograph, so each section carries its
      own translucent ground to keep text legible as it scrolls over it. */
   background: rgba(248, 250, 252, 0.82);
@@ -309,34 +309,34 @@
 
 .section-eyebrow {
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   color: var(--teal-700);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--sp-3);
 }
 
 .landing-section-alt .section-eyebrow { color: var(--cyan-300); }
 
 .section-title {
-  font-size: clamp(1.75rem, 3.4vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  font-size: var(--fs-display);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-hero);
+  line-height: var(--lh-tight);
   color: var(--navy-900);
-  margin-bottom: 1rem;
-  max-width: 22ch;
+  margin-bottom: var(--sp-4);
+  max-width: 20ch;
 }
 
 .landing-section-alt .section-title { color: #fff; }
 
 .section-lead {
-  font-size: 1.02rem;
-  line-height: 1.7;
+  font-size: var(--fs-md);
+  line-height: var(--lh-loose);
   color: var(--slate-600);
-  max-width: 68ch;
-  margin-bottom: 2.75rem;
+  max-width: 62ch;
+  margin-bottom: var(--sp-8);
 }
 
 .landing-section-alt .section-lead { color: rgba(255, 255, 255, 0.72); }
@@ -345,12 +345,12 @@
 .pillar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 3rem;
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-8);
 }
 
 .pillar-card {
-  padding: 1.6rem 1.5rem;
+  padding: var(--sp-6) var(--sp-5);
   border-radius: var(--radius-lg);
   background: var(--glass-bg-card);
   border: 1px solid var(--glass-border-light);
@@ -378,16 +378,16 @@
 }
 
 .pillar-card h3 {
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
   color: var(--navy-900);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-3);
+  letter-spacing: var(--ls-tight);
 }
 
 .pillar-card p {
-  font-size: 0.88rem;
-  line-height: 1.65;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
   color: var(--slate-600);
 }
 
@@ -400,7 +400,7 @@
 }
 
 .role-strip-head {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -424,13 +424,13 @@
 .role-card > div { display: flex; flex-direction: column; gap: 0.15rem; }
 
 .role-card strong {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--navy-900);
   font-weight: 800;
 }
 
 .role-card span {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   line-height: 1.5;
   color: var(--slate-600);
 }
@@ -448,14 +448,14 @@
 }
 
 .analytics-subhead {
-  font-size: 1.15rem;
+  font-size: var(--fs-md);
   font-weight: 800;
   color: #fff;
   margin-bottom: 0.75rem;
 }
 
 .analytics-copy p {
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.72);
   margin-bottom: 1.5rem;
@@ -478,7 +478,7 @@
 
 .model-stats strong {
   display: block;
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
   font-weight: 800;
   color: var(--cyan-300);
   font-variant-numeric: tabular-nums;
@@ -486,7 +486,7 @@
 }
 
 .model-stats span {
-  font-size: 0.66rem;
+  font-size: var(--fs-2xs);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -498,7 +498,7 @@
 }
 
 .analytics-note {
-  font-size: 0.84rem !important;
+  font-size: var(--fs-sm) !important;
   color: rgba(255, 255, 255, 0.55) !important;
   border-left: 2px solid rgba(6, 182, 212, 0.45);
   padding-left: 0.9rem;
@@ -530,7 +530,7 @@
 
 .risk-preview-eyebrow {
   display: block;
-  font-size: 0.66rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -538,7 +538,7 @@
 }
 
 .risk-preview-patient {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--navy-900);
   margin-top: 0.15rem;
@@ -548,7 +548,7 @@
 
 .risk-preview-score strong {
   display: block;
-  font-size: 2.1rem;
+  font-size: var(--fs-2xl);
   font-weight: 800;
   line-height: 1;
   color: var(--risk-high);
@@ -556,7 +556,7 @@
 }
 
 .risk-preview-score span {
-  font-size: 0.64rem;
+  font-size: var(--fs-2xs);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -575,7 +575,7 @@
   display: grid;
   grid-template-columns: 36px 1fr;
   gap: 0.5rem 0.6rem;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   align-items: baseline;
 }
 
@@ -591,7 +591,7 @@
 .rp-detail {
   grid-column: 2;
   color: var(--slate-500);
-  font-size: 0.74rem;
+  font-size: var(--fs-xs);
   line-height: 1.4;
 }
 
@@ -606,7 +606,7 @@
 .rp-bar-head {
   display: flex;
   justify-content: space-between;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--slate-600);
   margin-bottom: 0.2rem;
@@ -632,7 +632,7 @@
   margin-top: 0.9rem;
   padding-top: 0.7rem;
   border-top: 1px dashed var(--slate-200);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-style: italic;
   line-height: 1.5;
   color: var(--slate-500);
@@ -690,7 +690,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 800;
   color: var(--navy-900);
   margin-bottom: 0.35rem;
@@ -700,13 +700,13 @@
 .resource-card:hover h3 svg { color: var(--teal-600); transform: translate(2px, -2px); }
 
 .resource-card p {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--slate-600);
 }
 
 .rail-hint {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--slate-400);
   margin-top: 0.25rem;
@@ -731,7 +731,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.05rem;
+  font-size: var(--fs-base);
   font-weight: 800;
   color: #fff;
   margin-bottom: 0.5rem;
@@ -740,7 +740,7 @@
 .landing-footer-brand svg { color: var(--cyan-400); }
 
 .landing-footer p {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.5);
   max-width: 52ch;
@@ -753,7 +753,7 @@
 }
 
 .landing-footer-links a {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.62);
   text-decoration: none;
@@ -763,7 +763,7 @@
 .landing-footer-links a:hover { color: var(--cyan-300); }
 
 @media (max-width: 720px) {
-  .landing-section { padding: 3.25rem 0; }
+  .landing-section { padding: var(--sp-7) 0; }
   .section-inner { padding: 0 1.25rem; }
   .hero-top-nav { padding: 0.9rem 1.25rem; }
   .hero-nav-links { display: none; }

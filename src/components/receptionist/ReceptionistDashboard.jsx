@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, User, UserPlus, Plus } from 'lucide-react';
+import { AlertTriangle, Calendar, Check, Plus, TrendingUp, User, UserPlus } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useHospitalData } from '../../context/DataContext';
 import { computeReceptionistMetrics } from '../../utils/metrics';
@@ -131,7 +131,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
       <div className="dashboard-header-banner">
         <div className="header-banner-text">
           <span className="role-badge-pill" style={{ color: '#FCD34D' }}>Front Desk &amp; Patient Intake</span>
@@ -160,7 +160,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Today's Appointments</span>
             <span className="metric-value">{metrics.totalBookings} Bookings</span>
-            <span className="metric-trend up">↑ {metrics.urgent} flagged urgent</span>
+            <span className="metric-trend up"><TrendingUp className="trend-icon" /> {metrics.urgent} flagged urgent</span>
           </div>
           <div className="metric-icon-box"><Calendar style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -169,7 +169,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Checked-In Patients</span>
             <span className="metric-value">{metrics.checkedIn} Waiting</span>
-            <span className="metric-trend up">● {metrics.inConsultation} in consultation now</span>
+            <span className="metric-trend up"><Check className="trend-icon" /> {metrics.inConsultation} in consultation now</span>
           </div>
           <div className="metric-icon-box"><User style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -178,7 +178,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Awaiting Check-In</span>
             <span className="metric-value">{metrics.awaitingCheckIn} Pending</span>
-            <span className="metric-trend down">⚡ {metrics.completed} already completed</span>
+            <span className="metric-trend down"><AlertTriangle className="trend-icon" /> {metrics.completed} already completed</span>
           </div>
           <div className="metric-icon-box"><UserPlus style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -222,7 +222,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
                       <td><strong>{a.time}</strong></td>
                       <td>
                         <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>{a.patientName}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--slate-500)' }}>{a.reason}</div>
+                        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>{a.reason}</div>
                       </td>
                       <td>{a.doctor}</td>
                       <td><span className="badge badge-info">{a.dept}</span></td>
@@ -232,13 +232,13 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
                           : a.status === 'In Consultation' ? 'badge-info'
                           : a.status === 'Checked-In' ? 'badge-warning'
                           : 'badge-info'
-                        }`}>● {a.status}</span>
+                        }`}><span className="status-dot" /> {a.status}</span>
                       </td>
                       <td>
                         <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                           <button
                             className="btn-pill btn-pill-teal"
-                            style={{ padding: '0.35rem 0.8rem', fontSize: '0.78rem' }}
+                            style={{ padding: '0.35rem 0.8rem', fontSize: 'var(--fs-xs)' }}
                             disabled={a.status !== 'Scheduled' || submitting}
                             onClick={() => handleCheckIn(a)}
                           >
@@ -246,7 +246,7 @@ export default function ReceptionistDashboard({ onOpenEMR }) {
                           </button>
                           <button
                             className="btn-pill btn-pill-secondary"
-                            style={{ padding: '0.35rem 0.8rem', fontSize: '0.78rem' }}
+                            style={{ padding: '0.35rem 0.8rem', fontSize: 'var(--fs-xs)' }}
                             onClick={() => onOpenEMR(a.patientId)}
                           >
                             Record

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Activity, Bed, Pill } from 'lucide-react';
+import { Activity, AlertTriangle, Bed, Check, Pill, TrendingUp } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useHospitalData } from '../../context/DataContext';
 import { computeNurseMetrics } from '../../utils/metrics';
@@ -94,7 +94,7 @@ export default function NurseDashboard({ onOpenEMR }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
       <div className="dashboard-header-banner">
         <div className="header-banner-text">
           <span className="role-badge-pill" style={{ color: '#A5B4FC' }}>Ward &amp; Clinical Care Unit</span>
@@ -123,7 +123,7 @@ export default function NurseDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Ward Bed Occupancy</span>
             <span className="metric-value">{metrics.occupancyLabel}</span>
-            <span className="metric-trend up">● {metrics.occupancyRate}% capacity across {metrics.wardCount} wards</span>
+            <span className="metric-trend up"><TrendingUp className="trend-icon" /> {metrics.occupancyRate}% capacity across {metrics.wardCount} wards</span>
           </div>
           <div className="metric-icon-box"><Bed style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -132,7 +132,7 @@ export default function NurseDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Critical Beds</span>
             <span className="metric-value" style={{ color: 'var(--risk-high)' }}>{metrics.critical} Patients</span>
-            <span className="metric-trend down">⚡ {metrics.available} available · {metrics.cleaning} cleaning</span>
+            <span className="metric-trend down"><AlertTriangle className="trend-icon" /> {metrics.available} available · {metrics.cleaning} cleaning</span>
           </div>
           <div className="metric-icon-box"><Activity style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -141,7 +141,7 @@ export default function NurseDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Doses Due</span>
             <span className="metric-value">{metrics.dosesDue} Dosages</span>
-            <span className="metric-trend up">✓ Active orders on admitted patients</span>
+            <span className="metric-trend up"><Check className="trend-icon" /> Active orders on admitted patients</span>
           </div>
           <div className="metric-icon-box"><Pill style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -174,7 +174,7 @@ export default function NurseDashboard({ onOpenEMR }) {
                   >
                     {b.patientName}
                   </button>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--slate-500)' }}>{b.condition}</div>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>{b.condition}</div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                     <span className={`badge ${
@@ -182,7 +182,7 @@ export default function NurseDashboard({ onOpenEMR }) {
                       : b.status === 'occupied' ? 'badge-info'
                       : b.status === 'cleaning' ? 'badge-warning'
                       : 'badge-success'
-                    }`} style={{ fontSize: '0.65rem' }}>
+                    }`} style={{ fontSize: 'var(--fs-2xs)' }}>
                       {b.status.toUpperCase()}
                     </span>
                     <button
@@ -310,15 +310,15 @@ export default function NurseDashboard({ onOpenEMR }) {
                     <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>
                       {dose.patientName} <span style={{ color: 'var(--slate-500)', fontWeight: 500 }}>({dose.bed})</span>
                     </div>
-                    <div style={{ fontSize: '0.85rem', color: 'var(--teal-700)', marginTop: '0.2rem' }}>{dose.drug}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--slate-500)' }}>{dose.freq}</div>
+                    <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--teal-700)', marginTop: '0.2rem' }}>{dose.drug}</div>
+                    <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>{dose.freq}</div>
                   </div>
                   <button
                     className="btn-pill btn-pill-teal"
-                    style={{ padding: '0.4rem 0.9rem', fontSize: '0.78rem' }}
+                    style={{ padding: '0.4rem 0.9rem', fontSize: 'var(--fs-xs)' }}
                     onClick={() => showToast(`${dose.drug} administered to ${dose.patientName} and signed`)}
                   >
-                    ✓ Administer &amp; Sign
+                    <Check style={{ width: '14px', height: '14px' }} /> Administer &amp; Sign
                   </button>
                 </div>
               ))}

@@ -151,14 +151,14 @@ export default function RiskRankedQueue({ patients, loading, error, onRetry, onO
                   </button>
                   <button
                     className="btn-pill btn-pill-teal"
-                    style={{ padding: '0.3rem 0.75rem', fontSize: '0.75rem' }}
+                    style={{ padding: '0.3rem 0.75rem', fontSize: 'var(--fs-xs)' }}
                     onClick={() => onOpenEMR(p.id)}
                   >
                     EMR
                   </button>
                   <button
                     className="btn-pill btn-pill-secondary"
-                    style={{ padding: '0.3rem 0.75rem', fontSize: '0.75rem' }}
+                    style={{ padding: '0.3rem 0.75rem', fontSize: 'var(--fs-xs)' }}
                     onClick={() => onOpenML(p.id)}
                   >
                     Assess

@@ -79,7 +79,7 @@ export default function LoginPage() {
 
         <h2 style={{
           textAlign: 'center',
-          fontSize: '1.4rem',
+          fontSize: 'var(--fs-lg)',
           fontWeight: 800,
           color: 'var(--navy-900)',
           marginBottom: '0.35rem',
@@ -88,7 +88,7 @@ export default function LoginPage() {
         </h2>
         <p style={{
           textAlign: 'center',
-          fontSize: '0.82rem',
+          fontSize: 'var(--fs-sm)',
           color: 'var(--teal-700)',
           fontWeight: 600,
           marginBottom: '1.5rem',
@@ -99,7 +99,7 @@ export default function LoginPage() {
         {!isLive && (
           <>
             <div style={{
-              fontSize: '0.72rem',
+              fontSize: 'var(--fs-xs)',
               fontWeight: 700,
               color: 'var(--slate-500)',
               textAlign: 'center',
@@ -154,7 +154,7 @@ export default function LoginPage() {
                 background: 'var(--risk-high-bg)',
                 border: '1px solid rgba(225, 29, 72, 0.35)',
                 color: 'var(--risk-high)',
-                fontSize: '0.82rem',
+                fontSize: 'var(--fs-sm)',
                 fontWeight: 600,
               }}
             >
@@ -165,7 +165,7 @@ export default function LoginPage() {
           <button
             type="submit"
             className="btn-pill btn-pill-primary"
-            style={{ width: '100%', padding: '0.9rem', fontSize: '1.1rem', marginTop: '0.5rem' }}
+            style={{ width: '100%', padding: '0.9rem', fontSize: 'var(--fs-md)', marginTop: '0.5rem' }}
             disabled={busy}
           >
             {busy ? 'Signing in…' : 'Secure Access'}
@@ -175,7 +175,7 @@ export default function LoginPage() {
         <div style={{
           textAlign: 'center',
           marginTop: '1.1rem',
-          fontSize: '0.7rem',
+          fontSize: 'var(--fs-xs)',
           color: 'var(--slate-400)',
         }}>
           {isLive

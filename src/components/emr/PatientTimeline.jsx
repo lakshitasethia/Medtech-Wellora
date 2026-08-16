@@ -73,7 +73,7 @@ export default function PatientTimeline({ patient }) {
     <div className="timeline-wrap">
       <div className="card-header-row" style={{ marginBottom: '0.85rem' }}>
         <div>
-          <h3 className="card-title" style={{ fontSize: '0.98rem' }}>
+          <h3 className="card-title" style={{ fontSize: 'var(--fs-base)' }}>
             <History style={{ width: '18px', height: '18px' }} /> Unified Care Timeline
           </h3>
           <p className="card-subtitle">

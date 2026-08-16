@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Users, Activity, Bed, FileText, Plus } from 'lucide-react';
+import { Activity, AlertTriangle, Bed, Check, FileText, Plus, Shield, TrendingUp, Users } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { computeAdminMetrics } from '../../utils/metrics';
 import { useHospitalData } from '../../context/DataContext';
@@ -13,7 +13,7 @@ export default function AdminDashboard() {
   const metrics = computeAdminMetrics(data);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
       {/* Role Header Banner */}
       <div className="dashboard-header-banner">
         <div className="header-banner-text">
@@ -49,13 +49,13 @@ export default function AdminDashboard() {
 
       {/* Tab 1: Overview */}
       {activeTab === 'overview' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
           <div className="metrics-grid">
             <div className="metric-card">
               <div className="metric-info">
                 <span className="metric-label">Hospital Bed Occupancy</span>
                 <span className="metric-value">{metrics.bedOccupancyRate}%</span>
-                <span className="metric-trend up">↑ {metrics.occupancyLabel} occupied</span>
+                <span className="metric-trend up"><TrendingUp className="trend-icon" /> {metrics.occupancyLabel} occupied</span>
               </div>
               <div className="metric-icon-box"><Bed style={{ width: '24px', height: '24px' }} /></div>
             </div>
@@ -64,7 +64,7 @@ export default function AdminDashboard() {
               <div className="metric-info">
                 <span className="metric-label">Active Patient Records</span>
                 <span className="metric-value">{metrics.activePatients}</span>
-                <span className="metric-trend down">⚡ {metrics.criticalPatients} triaged critical</span>
+                <span className="metric-trend down"><AlertTriangle className="trend-icon" /> {metrics.criticalPatients} triaged critical</span>
               </div>
               <div className="metric-icon-box" style={{ color: 'var(--teal-600)' }}><FileText style={{ width: '24px', height: '24px' }} /></div>
             </div>
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
               <div className="metric-info">
                 <span className="metric-label">Active Personnel</span>
                 <span className="metric-value">{metrics.totalStaff}</span>
-                <span className="metric-trend up">● {metrics.onDutyStaff} on duty across {metrics.departmentCount} departments</span>
+                <span className="metric-trend up"><Check className="trend-icon" /> {metrics.onDutyStaff} on duty across {metrics.departmentCount} departments</span>
               </div>
               <div className="metric-icon-box"><Users style={{ width: '24px', height: '24px' }} /></div>
             </div>
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
               <div className="metric-info">
                 <span className="metric-label">Mean Cardiac Risk Index</span>
                 <span className="metric-value">{metrics.avgRisk}%</span>
-                <span className="metric-trend down">⚡ Across all active records</span>
+                <span className="metric-trend down"><AlertTriangle className="trend-icon" /> Across all active records</span>
               </div>
               <div className="metric-icon-box"><Activity style={{ width: '24px', height: '24px' }} /></div>
             </div>
@@ -151,11 +151,11 @@ export default function AdminDashboard() {
                     <td><strong>{String(s.id).slice(0, 8)}</strong></td>
                     <td>
                       <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>{s.name}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--slate-500)' }}>{s.role}</div>
+                      <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>{s.role}</div>
                     </td>
                     <td><span className="badge badge-info">{s.department}</span></td>
-                    <td><span style={{ fontSize: '0.8rem' }}>{s.shift}</span></td>
-                    <td><span className="badge badge-success">● {s.status}</span></td>
+                    <td><span style={{ fontSize: 'var(--fs-sm)' }}>{s.shift}</span></td>
+                    <td><span className="badge badge-success"><Check className="badge-icon" /> {s.status}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -171,7 +171,7 @@ export default function AdminDashboard() {
           <h2 className="card-title"><Activity style={{ width: '20px', height: '20px' }} /> Department Capacity Analysis</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1.25rem' }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', fontWeight: 700, marginBottom: '0.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', fontWeight: 700, marginBottom: '0.4rem' }}>
                 <span>ICU Critical Care Unit</span>
                 <span style={{ color: 'var(--teal-700)' }}>90% Capacity (18/20 Beds)</span>
               </div>
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', fontWeight: 700, marginBottom: '0.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', fontWeight: 700, marginBottom: '0.4rem' }}>
                 <span>Cardiology Ward</span>
                 <span style={{ color: 'var(--teal-700)' }}>85% Capacity (34/40 Beds)</span>
               </div>
@@ -201,17 +201,17 @@ export default function AdminDashboard() {
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.85rem', background: 'rgba(255,255,255,0.7)', borderRadius: '12px' }}>
               <div>
                 <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>Doctor Role EMR Access</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--slate-500)' }}>Full read/write EMR, ML predictor execution</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>Full read/write EMR, ML predictor execution</div>
               </div>
-              <span className="badge badge-success">✓ Enabled</span>
+              <span className="badge badge-success"><Check className="badge-icon" /> Enabled</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.85rem', background: 'rgba(255,255,255,0.7)', borderRadius: '12px' }}>
               <div>
                 <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>Nurse Role Vitals Log</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--slate-500)' }}>Vitals entry, MAR checklist sign-off</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>Vitals entry, MAR checklist sign-off</div>
               </div>
-              <span className="badge badge-success">✓ Enabled</span>
+              <span className="badge badge-success"><Check className="badge-icon" /> Enabled</span>
             </div>
           </div>
         </div>

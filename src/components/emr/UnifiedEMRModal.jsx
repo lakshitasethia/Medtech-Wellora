@@ -50,7 +50,7 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
           justifyContent: 'space-between',
           borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
         }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <h2 style={{ fontSize: 'var(--fs-lg)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <FileText style={{ width: '22px', height: '22px' }} />
             Single Source of Truth EMR: {patient.name} ({patient.id})
           </h2>
@@ -67,11 +67,11 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
             borderBottom: '1px solid var(--slate-200)'
           }}>
             <div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--navy-900)' }}>{patient.name}</h3>
-              <div style={{ fontSize: '0.85rem', color: 'var(--teal-700)', fontWeight: 600, marginTop: '0.2rem' }}>
+              <h3 style={{ fontSize: 'var(--fs-lg)', fontWeight: 800, color: 'var(--navy-900)' }}>{patient.name}</h3>
+              <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--teal-700)', fontWeight: 600, marginTop: '0.2rem' }}>
                 Age: {patient.age} Yrs | Gender: {patient.gender} | Blood Type: {patient.bloodType}
               </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--slate-500)', marginTop: '0.2rem' }}>
+              <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--slate-500)', marginTop: '0.2rem' }}>
                 Emergency: {patient.emergencyContact}
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
               <span className={`badge ${patient.triagePriority === 'Critical' ? 'badge-danger' : 'badge-warning'}`} style={{ padding: '0.4rem 0.8rem' }}>
                 Triage: {patient.triagePriority}
               </span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--slate-500)' }}>
+              <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>
                 Assigned: {patient.assignedDoctor}
               </span>
             </div>
@@ -110,28 +110,28 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
             {/* Column 1: Vitals & Allergies */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ padding: '1.1rem', background: 'rgba(255,255,255,0.8)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <AlertTriangle style={{ width: '16px', height: '16px', color: '#E11D48' }} />
                   Allergies & Medical Alerts
                 </h4>
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                   {patient.allergies.map(a => (
-                    <span key={a} className="badge badge-danger">⚠️ {a}</span>
+                    <span key={a} className="badge badge-danger"><AlertTriangle className="badge-icon" /> {a}</span>
                   ))}
                   {patient.chronicConditions.map(c => (
-                    <span key={c} className="badge badge-warning">● {c}</span>
+                    <span key={c} className="badge badge-warning"><span className="status-dot" /> {c}</span>
                   ))}
                 </div>
               </div>
 
               <div style={{ padding: '1.1rem', background: 'rgba(255,255,255,0.8)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Activity style={{ width: '16px', height: '16px', color: 'var(--teal-600)' }} />
                   Vitals Timeline Log
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {patient.vitalsHistory.map((v, idx) => (
-                    <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '0.4rem 0.6rem', background: 'rgba(241,245,249,0.7)', borderRadius: '8px' }}>
+                    <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', padding: '0.4rem 0.6rem', background: 'rgba(241,245,249,0.7)', borderRadius: '8px' }}>
                       <span style={{ fontWeight: 600 }}>{v.time}</span>
                       <span>BP: <strong>{v.bp}</strong> | HR: <strong>{v.hr}</strong> | SpO2: <strong>{v.spo2}</strong></span>
                     </div>
@@ -143,16 +143,16 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
             {/* Column 2: Diagnostic Labs & ML Risk */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ padding: '1.1rem', background: 'rgba(255,255,255,0.8)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <FileText style={{ width: '16px', height: '16px', color: 'var(--teal-600)' }} />
                   Diagnostic Reports
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {patient.labResults.map((lab, idx) => (
-                    <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '0.4rem 0.6rem', background: 'rgba(241,245,249,0.7)', borderRadius: '8px' }}>
+                    <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', padding: '0.4rem 0.6rem', background: 'rgba(241,245,249,0.7)', borderRadius: '8px' }}>
                       <div>
                         <div style={{ fontWeight: 700 }}>{lab.test}</div>
-                        <div style={{ fontSize: '0.72rem', color: 'var(--slate-500)' }}>{lab.date}</div>
+                        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--slate-500)' }}>{lab.date}</div>
                       </div>
                       <span className={`badge ${lab.status === 'Flagged' ? 'badge-danger' : 'badge-success'}`}>{lab.result}</span>
                     </div>
@@ -161,16 +161,16 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
               </div>
 
               <div style={{ padding: '1.1rem', background: 'linear-gradient(135deg, rgba(6,182,212,0.1), rgba(13,148,136,0.15))', borderRadius: '14px', border: '1px solid rgba(6,182,212,0.3)' }}>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 700, color: 'var(--navy-900)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Heart style={{ width: '16px', height: '16px', color: '#E11D48' }} />
                   ML Heart Disease Risk Score
                 </h4>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <div style={{ fontSize: '1.6rem', fontWeight: 800, color: patient.mlHeartRisk.riskScore > 70 ? '#E11D48' : '#059669' }}>
+                    <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 800, color: patient.mlHeartRisk.riskScore > 70 ? '#E11D48' : '#059669' }}>
                       {patient.mlHeartRisk.riskScore}% Risk
                     </div>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal-700)' }}>
+                    <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--teal-700)' }}>
                       {patient.mlHeartRisk.riskCategory}
                     </div>
                   </div>

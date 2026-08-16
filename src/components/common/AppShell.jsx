@@ -33,7 +33,7 @@ export default function AppShell() {
             maxWidth: '1600px',
             width: '100%',
             margin: '0 auto',
-            padding: '1.75rem 2rem',
+            padding: 'var(--sp-7) var(--sp-6)',
           }}
         >
           <Outlet context={{ openEMR, openML }} />

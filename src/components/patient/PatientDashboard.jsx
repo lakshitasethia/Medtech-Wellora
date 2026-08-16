@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Calendar, Pill, FileText, Heart, Activity } from 'lucide-react';
+import { Activity, AlertTriangle, Calendar, Check, FileText, Heart, Pill, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { computePatientMetrics } from '../../utils/metrics';
 import { useHospitalData } from '../../context/DataContext';
@@ -50,7 +50,7 @@ export default function PatientDashboard({ onOpenEMR }) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
       {/* Role Banner Header */}
       <div className="dashboard-header-banner">
         <div className="header-banner-text">
@@ -85,7 +85,7 @@ export default function PatientDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Next Appointment</span>
             <span className="metric-value">{metrics.nextAppointmentTime}</span>
-            <span className="metric-trend up">● {patient.assignedDoctor}</span>
+            <span className="metric-trend up"><Check className="trend-icon" /> {patient.assignedDoctor}</span>
           </div>
           <div className="metric-icon-box"><Calendar style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -94,7 +94,7 @@ export default function PatientDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Active Prescriptions</span>
             <span className="metric-value">{metrics.activeMedCount} Active Meds</span>
-            <span className="metric-trend up">✓ Prescribed by your care team</span>
+            <span className="metric-trend up"><Check className="trend-icon" /> Prescribed by your care team</span>
           </div>
           <div className="metric-icon-box"><Pill style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -103,7 +103,7 @@ export default function PatientDashboard({ onOpenEMR }) {
           <div className="metric-info">
             <span className="metric-label">Recent Lab Results</span>
             <span className="metric-value">{metrics.flaggedLabs} Flagged</span>
-            <span className="metric-trend down">⚡ of {metrics.totalLabs} results — discuss with your doctor</span>
+            <span className="metric-trend down"><AlertTriangle className="trend-icon" /> of {metrics.totalLabs} results — discuss with your doctor</span>
           </div>
           <div className="metric-icon-box" style={{ color: 'var(--risk-moderate)' }}><Activity style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -124,7 +124,7 @@ export default function PatientDashboard({ onOpenEMR }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
             <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.7)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)' }}>
-              <div style={{ fontWeight: 700, color: 'var(--navy-900)', fontSize: '0.95rem' }}>Active Allergies & Conditions</div>
+              <div style={{ fontWeight: 700, color: 'var(--navy-900)', fontSize: 'var(--fs-base)' }}>Active Allergies & Conditions</div>
               <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.4rem' }}>
                 {patient.allergies.map(a => <span key={a} className="badge badge-danger">Allergy: {a}</span>)}
                 {patient.chronicConditions.map(c => <span key={c} className="badge badge-warning">{c}</span>)}
@@ -143,9 +143,9 @@ export default function PatientDashboard({ onOpenEMR }) {
               <div key={idx} style={{ padding: '1rem', background: 'rgba(255,255,255,0.7)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>{rx.drug} {rx.dose}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--slate-500)' }}>{rx.freq} | {rx.duration}</div>
+                  <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--slate-500)' }}>{rx.freq} | {rx.duration}</div>
                 </div>
-                <button className="btn-pill btn-pill-secondary" style={{ padding: '0.35rem 0.8rem', fontSize: '0.78rem' }} onClick={() => showToast('Refill Request Sent to Pharmacy')}>
+                <button className="btn-pill btn-pill-secondary" style={{ padding: '0.35rem 0.8rem', fontSize: 'var(--fs-xs)' }} onClick={() => showToast('Refill Request Sent to Pharmacy')}>
                   Request Refill
                 </button>
               </div>
@@ -194,7 +194,7 @@ export default function PatientDashboard({ onOpenEMR }) {
             <div style={{
               width: '100%',
               textAlign: 'left',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-sm)',
               lineHeight: 1.6,
               color: 'var(--slate-700)',
               background: 'rgba(255,255,255,0.75)',

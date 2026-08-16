@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stethoscope, User, Activity, Pill, FileText, Zap } from 'lucide-react';
+import { Activity, AlertTriangle, Check, FileText, PenLine, Pill, Stethoscope, TrendingUp, User, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useHospitalData } from '../../context/DataContext';
 import { computeDoctorMetrics, patientsByAppointment } from '../../utils/metrics';
@@ -107,7 +107,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
       <div className="dashboard-header-banner">
         <div className="header-banner-text">
           <span className="role-badge-pill" style={{ color: '#2DD4BF' }}>Attending Physician Workstation</span>
@@ -145,7 +145,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
           <div className="metric-info">
             <span className="metric-label">Today's Patient Queue</span>
             <span className="metric-value">{metrics.queueTotal} Patients</span>
-            <span className="metric-trend up">● {metrics.queueTrend}</span>
+            <span className="metric-trend up"><TrendingUp className="trend-icon" /> {metrics.queueTrend}</span>
           </div>
           <div className="metric-icon-box"><User style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -154,7 +154,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
           <div className="metric-info">
             <span className="metric-label">High Ischemia Alerts</span>
             <span className="metric-value" style={{ color: 'var(--risk-high)' }}>{metrics.highRiskCount} Patients</span>
-            <span className="metric-trend down">⚡ {metrics.riskThresholdLabel}</span>
+            <span className="metric-trend down"><AlertTriangle className="trend-icon" /> {metrics.riskThresholdLabel}</span>
           </div>
           <div className="metric-icon-box" style={{ color: 'var(--risk-high)' }}><Activity style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -163,7 +163,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
           <div className="metric-info">
             <span className="metric-label">Active Prescriptions</span>
             <span className="metric-value">{metrics.activePrescriptions} Active</span>
-            <span className="metric-trend up">✓ {metrics.patientsWithAllergies} patients with recorded allergies</span>
+            <span className="metric-trend up"><Check className="trend-icon" /> {metrics.patientsWithAllergies} patients with recorded allergies</span>
           </div>
           <div className="metric-icon-box"><Pill style={{ width: '24px', height: '24px' }} /></div>
         </div>
@@ -286,17 +286,17 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
             {/* Real check against the patient's recorded allergies and active orders */}
             {!rxPatient ? null : allergyConflicts.length > 0 ? (
               <div className="rx-check rx-check-danger">
-                ⚠ Contraindication: {rxPatient.name} has a recorded allergy to{' '}
+                <AlertTriangle className="rx-check-icon" /> Contraindication: {rxPatient.name} has a recorded allergy to{' '}
                 <strong>{allergyConflicts.join(', ')}</strong>. Prescription blocked.
               </div>
             ) : duplicateOrder ? (
               <div className="rx-check rx-check-warning">
-                ⚠ Duplicate order: {rxPatient.name} already has an active prescription for{' '}
+                <AlertTriangle className="rx-check-icon" /> Duplicate order: {rxPatient.name} already has an active prescription for{' '}
                 <strong>{duplicateOrder.drug}</strong> ({duplicateOrder.dose}, {duplicateOrder.freq}).
               </div>
             ) : (
               <div className="rx-check rx-check-ok">
-                ✓ Checked against {rxPatient.allergies.length} recorded{' '}
+                <Check className="rx-check-icon" /> Checked against {rxPatient.allergies.length} recorded{' '}
                 {rxPatient.allergies.length === 1 ? 'allergy' : 'allergies'} and{' '}
                 {rxPatient.prescriptions.length} active{' '}
                 {rxPatient.prescriptions.length === 1 ? 'order' : 'orders'} — no conflict found.
@@ -309,7 +309,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
               style={{ width: '100%' }}
               disabled={submitting || !rxPatient || allergyConflicts.length > 0}
             >
-              {submitting ? 'Dispatching…' : '✒ Sign & Dispatch E-Prescription'}
+              {submitting ? 'Dispatching…' : <><PenLine style={{ width: '15px', height: '15px' }} /> Sign &amp; Dispatch E-Prescription</>}
             </button>
           </form>
         </div>

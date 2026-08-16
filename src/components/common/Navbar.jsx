@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, AUTH_MODE, ROLES } from '../../context/AuthContext';
 import { HOME_FOR_ROLE } from '../../routes/guards';
 import { useHospitalData } from '../../context/DataContext';
-import { Activity, Search, LogOut, ChevronDown } from 'lucide-react';
+import { Activity, ChevronDown, LogOut, Search, Zap } from 'lucide-react';
 
 export default function Navbar({ onOpenEMR }) {
   const { userRole, signOut, switchRole, profile, displayName } = useAuth();
@@ -66,7 +66,7 @@ export default function Navbar({ onOpenEMR }) {
         className={`sync-pill ${isLive ? 'sync-pill-live' : 'sync-pill-demo'}`}
         title={lastSync ? `Last synced ${lastSync.toLocaleTimeString()}` : undefined}
       >
-        {loading ? 'Syncing…' : isLive ? '● Live data' : '● Demo data'}
+        <><span className="status-dot" />{loading ? 'Syncing…' : isLive ? 'Live data' : 'Demo data'}</>
       </span>
 
       <div className="navbar-actions">
@@ -89,10 +89,10 @@ export default function Navbar({ onOpenEMR }) {
 
             <button
               className="btn-pill btn-pill-primary"
-              style={{ padding: '0.45rem 1.1rem', fontSize: '0.8rem' }}
+              style={{ padding: '0.45rem 1.1rem', fontSize: 'var(--fs-sm)' }}
               onClick={() => onOpenEMR('WEL-8942')}
             >
-              ⚡ Quick EMR
+              <Zap style={{ width: '14px', height: '14px' }} /> Quick EMR
             </button>
           </>
         )}
@@ -129,7 +129,7 @@ export default function Navbar({ onOpenEMR }) {
             }}>
               {canSwitchRole ? (
                 <>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--slate-400)', padding: '0.4rem 0.6rem', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 700, color: 'var(--slate-400)', padding: '0.4rem 0.6rem', textTransform: 'uppercase' }}>
                     Switch View Role (Demo)
                   </div>
                   {ROLES.map(r => (
@@ -143,7 +143,7 @@ export default function Navbar({ onOpenEMR }) {
                         border: 'none',
                         background: userRole === r ? 'rgba(6, 182, 212, 0.12)' : 'transparent',
                         color: userRole === r ? 'var(--teal-700)' : 'var(--slate-700)',
-                        fontSize: '0.82rem',
+                        fontSize: 'var(--fs-sm)',
                         fontWeight: 600,
                         cursor: 'pointer'
                       }}
@@ -166,7 +166,7 @@ export default function Navbar({ onOpenEMR }) {
                   ))}
                 </>
               ) : (
-                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--slate-400)', padding: '0.5rem 0.6rem', lineHeight: 1.5 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, color: 'var(--slate-400)', padding: '0.5rem 0.6rem', lineHeight: 1.5 }}>
                   Signed in as <strong style={{ color: 'var(--navy-900)' }}>{userRole}</strong>.
                   Your role is set by your account.
                 </div>
@@ -181,7 +181,7 @@ export default function Navbar({ onOpenEMR }) {
                     border: 'none',
                     background: 'transparent',
                     color: '#E11D48',
-                    fontSize: '0.82rem',
+                    fontSize: 'var(--fs-sm)',
                     fontWeight: 600,
                     cursor: 'pointer',
                     display: 'flex',
