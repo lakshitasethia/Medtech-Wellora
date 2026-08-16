@@ -829,3 +829,64 @@
   .footer-bottom { flex-direction: column; gap: var(--sp-2); }
   .footer-disclaimer { text-align: left; }
 }
+
+/* ============================================================
+   SCALE-UP PASS — analytics column, resources, footer
+   These sit next to a large white card and a 52px section heading, so
+   they need to hold their own proportionally. Sizes raised one clear
+   step; nothing here is shared with the dashboards.
+   ============================================================ */
+
+/* ---------- Analytics: left column ---------- */
+.analytics-subhead { font-size: 1.75rem; margin-bottom: var(--sp-4); }
+
+.analytics-copy p {
+  font-size: 1.1875rem;        /* 19px */
+  line-height: 1.7;
+}
+
+.model-stats { gap: var(--sp-3); margin-bottom: var(--sp-6); }
+.model-stats div    { padding: var(--sp-5) var(--sp-3); }
+.model-stats strong { font-size: 2.125rem; }   /* 34px */
+.model-stats span   { font-size: 0.875rem; }   /* 14px, was 12 */
+
+.analytics-note {
+  font-size: 1.0625rem !important;   /* 17px */
+  line-height: 1.7;
+  padding-left: var(--sp-4);
+}
+
+/* CTA inside sections only — the top nav keeps its own sizing */
+.landing-section .btn-pill {
+  font-size: 1.0625rem;
+  padding: 0.8rem 1.6rem;
+}
+
+/* ---------- Risk card: hold proportion with the bigger left column ---------- */
+.risk-preview-patient      { font-size: 1.25rem; }
+.risk-preview-factors li   { font-size: 1.125rem; padding: var(--sp-4) 0; }
+.rp-points                 { font-size: 1.125rem; }
+.rp-label                  { font-size: 1.125rem; }   /* 18px */
+.rp-detail                 { font-size: 1rem; }       /* 16px */
+.rp-bar-head               { font-size: 1rem; }
+.risk-preview-foot         { font-size: 0.9375rem; }
+
+/* ---------- Resources ---------- */
+.resource-card h3 { font-size: 1.3125rem; }   /* 21px */
+.resource-card p  { font-size: 1.0625rem; line-height: 1.65; }
+.rail-hint        { font-size: 1rem; }
+
+/* ---------- Footer ---------- */
+.landing-footer-brand   { font-size: 1.375rem; }
+.footer-brand-col p     { font-size: 1.0625rem; line-height: 1.75; }
+.footer-col h4          { font-size: 0.8125rem; }
+.footer-col a           { font-size: 1.0625rem; }
+.footer-bottom          { font-size: 0.9375rem; }
+
+@media (max-width: 720px) {
+  .analytics-subhead { font-size: 1.4rem; }
+  .analytics-copy p  { font-size: 1.0625rem; }
+  .model-stats strong { font-size: 1.6rem; }
+  .rp-label, .rp-points, .risk-preview-factors li { font-size: 1.0625rem; }
+  .resource-card h3 { font-size: 1.1875rem; }
+}
