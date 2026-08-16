@@ -218,16 +218,6 @@ export default function HeroSection() {
           </div>
         </footer>
 
-        <a
-          className="scroll-cue"
-          data-anim="scroll-cue"
-          href="#healthcare"
-          onClick={(e) => scrollToSection(e, 'healthcare')}
-          aria-label="Scroll to learn more"
-        >
-          <span className="scroll-cue-mouse"><span /></span>
-          <span className="scroll-cue-label">Explore the platform</span>
-        </a>
       </div>
 
       {/* ── Healthcare ──────────────────────────────────────────────── */}

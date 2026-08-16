@@ -91,7 +91,6 @@ export function useLandingAnimations(enabled = true) {
         const heroTargets = [
           '[data-anim="hero-title"]', '[data-anim="hero-sub"]',
           '[data-anim="hero-cta"]', '[data-anim="hero-pill"]',
-          '[data-anim="scroll-cue"]',
         ];
         gsap.set(heroTargets, { opacity: 0, y: 16 });
 
@@ -103,8 +102,7 @@ export function useLandingAnimations(enabled = true) {
           .to('[data-anim="hero-title"]', { opacity: 1, y: 0, duration: 0.8 })
           .to('[data-anim="hero-sub"]',   { opacity: 1, y: 0, duration: 0.7 }, '-=0.62')
           .to('[data-anim="hero-cta"]',   { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
-          .to('[data-anim="hero-pill"]',  { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, '-=0.42')
-          .to('[data-anim="scroll-cue"]', { opacity: 1, y: 0, duration: 0.5 }, '-=0.3');
+          .to('[data-anim="hero-pill"]',  { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, '-=0.42');
 
         /* Hero background parallax. The photograph is a fixed body
            background, so it moves via background-position rather than
