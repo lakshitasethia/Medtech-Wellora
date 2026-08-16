@@ -466,3 +466,20 @@ Once the project exists, apply in order: `supabase/schema.sql`, then `supabase/r
 - [Supabase for Healthcare](https://supabase.com/solutions/healthcare)
 - [Supabase Row Level Security docs](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Supabase RBAC](https://supabase.com/features/role-based-access-control)
+
+### ✅ Phase 3 — differentiators (16 Aug 2026)
+
+**3.1 Unified care timeline**
+- `src/lib/timeline.js` — normalises `clinical_events` rows into one UI shape; day grouping; role labels. Demo mode reconstructs a timeline from the record itself and labels it **"Derived view"** rather than implying provenance it doesn't have.
+- `src/components/emr/PatientTimeline.jsx` — chronological timeline, role-coloured markers, event-type accents, per-role filter chips, expandable SOAP notes. Re-reads on `lastSync`, so an event written by another role appears without a manual refresh.
+- Wired into the EMR modal as a **Clinical Record / Care Timeline** tab pair, and into the patient portal as a fourth tab (RLS scopes it to their own rows — no client-side filtering).
+- `clinical_events` finally has a reader: 9 write sites since Phase 2, now surfaced.
+
+**3.2 Ambient risk ranking**
+- `src/utils/riskScore.js` — composite deterioration score out of 100: model 45, vitals trend 25, flagged labs 15, triage 15. **Direction-aware**: a rising systolic or falling SpO₂ scores separately from the absolute value, which is precisely what a static model snapshot cannot see. Every score returns its own factor list with points and plain-English reasons.
+- `src/components/doctor/RiskRankedQueue.jsx` — replaces the time-ordered table. Colour rail per row, score + band, **"Why?"** panel showing the full derivation, and a By risk / By time toggle. Rank-change indicators (▲/▼) plus a 6s highlight when a patient moves, honouring `prefers-reduced-motion`.
+- Deliberately non-interruptive: no modal, no toast, no alert to dismiss — the anti-alert-fatigue thesis made concrete against the documented 49–96% CDS override rates.
+
+**Verified in demo mode across 14 patients:** ranking discriminates correctly (Arthur Pendelton 91 — model 41 + vitals 25 capped + labs 10 + triage 15; Victor Almeida 71 on a similar model score but a flatter trend). Timeline renders 11 derived events for Eleanor Vance across 4 day-groups with correct role attribution. Both sort modes, the Why panel, and the tab wiring all confirmed.
+
+**Not yet verified against live Supabase** — that needs a signed-in session and I have no account password. The live path is the same code with `loadTimeline` taking the `clinical_events` branch; the query shape was validated separately against PostgREST.

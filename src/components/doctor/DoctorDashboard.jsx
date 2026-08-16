@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useHospitalData } from '../../context/DataContext';
 import { computeDoctorMetrics, patientsByAppointment } from '../../utils/metrics';
 import { createPrescription, saveConsultationNote } from '../../lib/actions';
-import { DataSection, EmptyState } from '../common/States';
+import RiskRankedQueue from './RiskRankedQueue';
 
 export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
   const { showToast } = useAuth();
@@ -130,7 +130,7 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
 
       <div className="sub-nav-tabs">
         <button className={`sub-nav-tab-btn ${activeTab === 'queue' ? 'active' : ''}`} onClick={() => setActiveTab('queue')}>
-          Today's Queue ({metrics.queueTotal})
+          Patient Worklist ({patients.length})
         </button>
         <button className={`sub-nav-tab-btn ${activeTab === 'notes' ? 'active' : ''}`} onClick={() => setActiveTab('notes')}>
           SOAP Consultation Notes
@@ -169,99 +169,16 @@ export default function DoctorDashboard({ onOpenEMR, onOpenML }) {
         </div>
       </div>
 
-      {/* Tab 1: Queue */}
+      {/* Tab 1: Risk-ranked worklist */}
       {activeTab === 'queue' && (
-        <div className="glass-card">
-          <div className="card-header-row">
-            <div>
-              <h2 className="card-title"><User style={{ width: '20px', height: '20px' }} /> Patient Consultation Queue</h2>
-              <p className="card-subtitle">Select a patient to inspect the unified EMR or run the risk model</p>
-            </div>
-          </div>
-
-          <DataSection
-            loading={loading}
-            error={error}
-            isEmpty={!queue.length}
-            onRetry={refresh}
-            skeletonRows={6}
-            empty={<EmptyState title="No patients in your queue" message="Registered patients will appear here once reception books them in." />}
-          >
-            <div className="table-responsive">
-              <table className="custom-table">
-                <thead>
-                  <tr>
-                    <th>Time</th>
-                    <th>Patient Name (ID)</th>
-                    <th>Chief Conditions</th>
-                    <th>Latest Vitals</th>
-                    <th>Triage Priority</th>
-                    <th>Cardiac Risk</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {queue.map((p) => {
-                    const latest = p.vitalsHistory?.[0];
-                    return (
-                      <tr key={p.id}>
-                        <td><strong>{p.appointmentTime ?? '—'}</strong></td>
-                        <td>
-                          <div style={{ fontWeight: 700, color: 'var(--navy-900)' }}>{p.name}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--slate-500)' }}>
-                            {p.id} | {p.age}y {p.gender}
-                          </div>
-                        </td>
-                        <td><span style={{ fontSize: '0.82rem' }}>{p.chronicConditions.join(', ') || '—'}</span></td>
-                        <td>
-                          {latest ? (
-                            <div style={{ fontSize: '0.78rem', lineHeight: 1.45 }}>
-                              <div>BP {latest.bp} · HR {latest.hr}</div>
-                              <div style={{ color: 'var(--slate-500)' }}>{latest.time}</div>
-                            </div>
-                          ) : (
-                            <span style={{ fontSize: '0.78rem', color: 'var(--slate-400)' }}>Not recorded</span>
-                          )}
-                        </td>
-                        <td>
-                          <span className={`badge ${
-                            p.triagePriority === 'Critical' ? 'badge-danger'
-                            : p.triagePriority === 'Urgent' ? 'badge-warning'
-                            : 'badge-success'
-                          }`}>
-                            {p.triagePriority}
-                          </span>
-                        </td>
-                        <td>
-                          <button
-                            className={`badge ${
-                              p.mlHeartRisk.riskScore >= 75 ? 'badge-danger'
-                              : p.mlHeartRisk.riskScore >= 45 ? 'badge-warning'
-                              : 'badge-success'
-                            }`}
-                            style={{ cursor: 'pointer', border: 'none' }}
-                            onClick={() => onOpenML(p.id)}
-                          >
-                            ⚡ {p.mlHeartRisk.riskScore}% Risk
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="btn-pill btn-pill-teal"
-                            style={{ padding: '0.35rem 0.85rem', fontSize: '0.78rem' }}
-                            onClick={() => onOpenEMR(p.id)}
-                          >
-                            Unified EMR
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </DataSection>
-        </div>
+        <RiskRankedQueue
+          patients={patients}
+          loading={loading}
+          error={error}
+          onRetry={refresh}
+          onOpenEMR={onOpenEMR}
+          onOpenML={onOpenML}
+        />
       )}
 
       {/* Tab 2: SOAP Notes */}

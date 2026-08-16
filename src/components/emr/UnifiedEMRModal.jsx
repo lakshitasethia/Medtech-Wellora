@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHospitalData } from '../../context/DataContext';
+import PatientTimeline from './PatientTimeline';
 import { FileText, AlertTriangle, Activity, Heart } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -9,6 +10,7 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
   // by AppShell and only toggles `isOpen`, so a conditional hook would change
   // the hook count between renders.
   const { patients } = useHospitalData();
+  const [emrTab, setEmrTab] = useState('record');
 
   if (!isOpen) return null;
 
@@ -83,8 +85,28 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
             </div>
           </div>
 
+          {/* Record / Timeline switch. Both views read the same underlying
+              record — one shows current state, the other how it got there. */}
+          <div className="sub-nav-tabs" style={{ marginBottom: '1.25rem' }}>
+            <button
+              className={`sub-nav-tab-btn ${emrTab === 'record' ? 'active' : ''}`}
+              onClick={() => setEmrTab('record')}
+            >
+              Clinical Record
+            </button>
+            <button
+              className={`sub-nav-tab-btn ${emrTab === 'timeline' ? 'active' : ''}`}
+              onClick={() => setEmrTab('timeline')}
+            >
+              Care Timeline
+            </button>
+          </div>
+
+          {emrTab === 'timeline' && <PatientTimeline patient={patient} />}
+
           {/* EMR Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+          {emrTab === 'record' && (
+          <div className="emr-grid">
             {/* Column 1: Vitals & Allergies */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ padding: '1.1rem', background: 'rgba(255,255,255,0.8)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.9)' }}>
@@ -149,7 +171,7 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
                       {patient.mlHeartRisk.riskScore}% Risk
                     </div>
                     <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal-700)' }}>
-                      Confidence: {patient.mlHeartRisk.confidence}
+                      {patient.mlHeartRisk.riskCategory}
                     </div>
                   </div>
                   <button className="btn-pill btn-pill-primary" onClick={() => { onClose(); onOpenML(patient.id); }}>
@@ -159,6 +181,7 @@ export default function UnifiedEMRModal({ patientId, isOpen, onClose, onOpenML }
               </div>
             </div>
           </div>
+          )}
         </div>
 
         <div className="modal-footer">

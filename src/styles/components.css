@@ -1218,3 +1218,429 @@
   font-style: italic;
   line-height: 1.45;
 }
+
+/* ============================================================
+   UNIFIED CARE TIMELINE
+   ============================================================ */
+.timeline-wrap { display: flex; flex-direction: column; }
+
+.timeline-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-chip {
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--slate-200);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.timeline-chip:hover { background: #fff; color: var(--navy-900); }
+
+.timeline-chip.active {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  color: #fff;
+}
+
+.timeline-day { margin-bottom: 0.5rem; }
+
+.timeline-day-heading {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-400);
+  margin: 0.75rem 0 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 0.85rem;
+  padding: 0 0 1.1rem 0;
+}
+
+/* The connecting rail between markers */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  bottom: 0;
+  width: 2px;
+  background: var(--slate-200);
+}
+
+.timeline-item:last-child::before { display: none; }
+
+.timeline-marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid var(--slate-200);
+  color: var(--slate-500);
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.timeline-body {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--glass-border-light);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.9rem;
+  box-shadow: 0 4px 14px -8px rgba(10, 25, 47, 0.2);
+}
+
+.timeline-item-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-type {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
+.timeline-time {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--slate-400);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.timeline-summary {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--navy-900);
+  margin-bottom: 0.4rem;
+}
+
+.timeline-actor {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+  color: var(--slate-500);
+  font-weight: 500;
+}
+
+.timeline-role {
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--slate-100);
+  color: var(--slate-600);
+}
+
+/* Role colours — consistent with each dashboard's banner accent */
+.timeline-role.role-doctor       { background: rgba(13,148,136,0.12);  color: var(--teal-700); }
+.timeline-role.role-nurse        { background: rgba(99,102,241,0.12);  color: #4F46E5; }
+.timeline-role.role-receptionist { background: rgba(217,119,6,0.12);   color: var(--risk-moderate); }
+.timeline-role.role-admin        { background: rgba(59,130,246,0.12);  color: var(--info-500); }
+.timeline-role.role-patient      { background: rgba(244,63,94,0.12);   color: #E11D48; }
+
+/* Event-type accent on the marker */
+.timeline-item.tone-teal   .timeline-marker { border-color: var(--teal-500);  color: var(--teal-700); }
+.timeline-item.tone-navy   .timeline-marker { border-color: var(--navy-700);  color: var(--navy-800); }
+.timeline-item.tone-violet .timeline-marker { border-color: #8B5CF6;          color: #7C3AED; }
+.timeline-item.tone-amber  .timeline-marker { border-color: var(--risk-moderate); color: var(--risk-moderate); }
+.timeline-item.tone-blue   .timeline-marker { border-color: var(--info-500);  color: var(--info-500); }
+.timeline-item.tone-rose   .timeline-marker { border-color: var(--risk-high); color: var(--risk-high); }
+.timeline-item.tone-slate  .timeline-marker { border-color: var(--slate-400); color: var(--slate-500); }
+
+.timeline-details {
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--slate-200);
+  padding-top: 0.45rem;
+}
+
+.timeline-details summary {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--teal-700);
+  cursor: pointer;
+}
+
+.timeline-details dl {
+  margin-top: 0.45rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+.timeline-details dt {
+  font-weight: 700;
+  color: var(--slate-500);
+  white-space: nowrap;
+}
+
+.timeline-details dd { color: var(--slate-700); line-height: 1.45; }
+
+/* EMR record grid — stacks on narrow viewports */
+.emr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 780px) {
+  .emr-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   RISK-RANKED WORKLIST
+   ============================================================ */
+.sort-toggle {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  background: rgba(10, 25, 47, 0.06);
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
+.sort-toggle button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.sort-toggle button.active {
+  background: var(--navy-900);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(10, 25, 47, 0.2);
+}
+
+.worklist { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.worklist-row {
+  display: grid;
+  grid-template-columns: 46px minmax(180px, 1.6fr) minmax(120px, 1fr) 96px auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--glass-border-light);
+  /* The rail is the ambient signal — colour without an interruption */
+  border-left: 5px solid var(--slate-400);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.worklist-row.band-critical { border-left-color: var(--risk-high); }
+.worklist-row.band-elevated { border-left-color: var(--risk-moderate); }
+.worklist-row.band-stable   { border-left-color: var(--risk-low); }
+
+.worklist-row:hover { box-shadow: var(--glass-shadow-hover); }
+
+/* Brief highlight when a patient changes position */
+.worklist-row.moved {
+  animation: worklist-moved 6s ease-out;
+}
+
+@keyframes worklist-moved {
+  0%   { background: rgba(6, 182, 212, 0.22); box-shadow: 0 0 0 3px rgba(6,182,212,0.25); }
+  25%  { background: rgba(6, 182, 212, 0.12); }
+  100% { background: rgba(255, 255, 255, 0.8); box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .worklist-row.moved { animation: none; background: rgba(6, 182, 212, 0.12); }
+}
+
+.worklist-rank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.rank-num {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--slate-400);
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-move {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 0.05rem 0.3rem;
+  border-radius: var(--radius-pill);
+}
+
+.rank-move.up   { background: var(--risk-high-bg); color: var(--risk-high); }
+.rank-move.down { background: var(--risk-low-bg);  color: var(--risk-low); }
+
+.worklist-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.worklist-meta,
+.worklist-conditions {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+
+.worklist-conditions { margin-top: 0.2rem; }
+
+.worklist-vitals { font-size: 0.78rem; color: var(--slate-700); line-height: 1.45; }
+.worklist-vitals .muted { color: var(--slate-400); font-size: 0.72rem; }
+
+.worklist-score { text-align: center; }
+
+.score-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--navy-900);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-band {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--slate-500);
+  margin-top: 0.15rem;
+}
+
+.score-bar {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--slate-200);
+  margin-top: 0.35rem;
+  overflow: hidden;
+}
+
+.score-bar span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.band-critical .score-bar { color: var(--risk-high); }
+.band-elevated .score-bar { color: var(--risk-moderate); }
+.band-stable   .score-bar { color: var(--risk-low); }
+
+.worklist-actions { display: flex; gap: 0.35rem; flex-wrap: wrap; justify-content: flex-end; }
+
+.why-btn { padding: 0.3rem 0.7rem; font-size: 0.72rem; }
+
+.worklist-explain {
+  grid-column: 1 / -1;
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid var(--slate-200);
+}
+
+.explain-head {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--navy-900);
+  margin-bottom: 0.6rem;
+}
+
+.explain-factors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.explain-factors li {
+  display: grid;
+  grid-template-columns: 44px 190px 1fr;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-size: 0.78rem;
+}
+
+.factor-points {
+  font-weight: 800;
+  color: var(--risk-high);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.factor-label { font-weight: 700; color: var(--navy-900); }
+.factor-detail { color: var(--slate-600); line-height: 1.4; }
+
+.explain-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--slate-200);
+  font-size: 0.72rem;
+  color: var(--slate-600);
+}
+
+.explain-breakdown strong { color: var(--navy-900); }
+
+.explain-note {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--slate-500);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .worklist-row { grid-template-columns: 40px 1fr auto; }
+  .worklist-vitals { display: none; }
+  .worklist-actions { grid-column: 1 / -1; justify-content: flex-start; }
+  .explain-factors li { grid-template-columns: 40px 1fr; }
+  .explain-factors .factor-detail { grid-column: 2; }
+}

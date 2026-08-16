@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { computePatientMetrics } from '../../utils/metrics';
 import { useHospitalData } from '../../context/DataContext';
 import { DataSection, EmptyState } from '../common/States';
+import PatientTimeline from '../emr/PatientTimeline';
 
 export default function PatientDashboard({ onOpenEMR }) {
   const { showToast } = useAuth();
@@ -72,6 +73,9 @@ export default function PatientDashboard({ onOpenEMR }) {
         </button>
         <button className={`sub-nav-tab-btn ${activeTab === 'cardiac' ? 'active' : ''}`} onClick={() => setActiveTab('cardiac')}>
           ML Cardiac Risk Assessment
+        </button>
+        <button className={`sub-nav-tab-btn ${activeTab === 'timeline' ? 'active' : ''}`} onClick={() => setActiveTab('timeline')}>
+          My Care Timeline
         </button>
       </div>
 
@@ -147,6 +151,14 @@ export default function PatientDashboard({ onOpenEMR }) {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Tab 4: Care timeline — RLS restricts clinical_events to this
+          patient's own rows, so no client-side filtering is needed. */}
+      {activeTab === 'timeline' && (
+        <div className="glass-card">
+          <PatientTimeline patient={patient} />
         </div>
       )}
 
