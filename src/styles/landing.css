@@ -1,13 +1,19 @@
 /* Landing Page Hero Layout (Matching Reference Image 1) */
 .hero-landing-container {
-  min-height: 100vh;
+  /* The sticky nav sits above this in the flow, so subtract its height to
+     keep the hero exactly one viewport tall. */
+  min-height: calc(100vh - var(--nav-h));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  padding-bottom: 1rem;
 }
 
 .hero-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 60;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -220,3 +226,549 @@
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(10, 25, 47, 0.2);
 }
+/* ============================================================
+   LANDING PAGE — scrollable content below the hero
+   ============================================================ */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Scroll affordance at the base of the hero */
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 1.75rem;
+  text-decoration: none;
+  color: var(--slate-500);
+  transition: var(--transition-fast);
+}
+
+.scroll-cue:hover { color: var(--teal-700); }
+
+.scroll-cue-mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-pill);
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  opacity: 0.65;
+}
+
+.scroll-cue-mouse span {
+  width: 3px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  animation: scroll-cue-drift 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-drift {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(8px); opacity: 0.35; }
+}
+
+.scroll-cue-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-mouse span { animation: none; }
+}
+
+/* ---------- Section scaffolding ---------- */
+.landing-section {
+  padding: 5rem 0;
+  /* The page background is a fixed photograph, so each section carries its
+     own translucent ground to keep text legible as it scrolls over it. */
+  background: rgba(248, 250, 252, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.landing-section-alt {
+  background: linear-gradient(180deg, rgba(10, 25, 47, 0.94) 0%, rgba(14, 42, 71, 0.96) 100%);
+  color: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.section-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-700);
+  margin-bottom: 0.75rem;
+}
+
+.landing-section-alt .section-eyebrow { color: var(--cyan-300); }
+
+.section-title {
+  font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--navy-900);
+  margin-bottom: 1rem;
+  max-width: 22ch;
+}
+
+.landing-section-alt .section-title { color: #fff; }
+
+.section-lead {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--slate-600);
+  max-width: 68ch;
+  margin-bottom: 2.75rem;
+}
+
+.landing-section-alt .section-lead { color: rgba(255, 255, 255, 0.72); }
+
+/* ---------- Healthcare: pillars ---------- */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.pillar-card {
+  padding: 1.6rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-card);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-hover);
+  border-color: var(--glass-border-cyan);
+}
+
+.pillar-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.24);
+  color: var(--teal-700);
+  margin-bottom: 1rem;
+}
+
+.pillar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy-900);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.pillar-card p {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--slate-600);
+}
+
+/* ---------- Healthcare: role strip ---------- */
+.role-strip {
+  padding: 1.6rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.role-strip-head {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin-bottom: 1.1rem;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.role-card {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  color: var(--teal-700);
+}
+
+.role-card > div { display: flex; flex-direction: column; gap: 0.15rem; }
+
+.role-card strong {
+  font-size: 0.88rem;
+  color: var(--navy-900);
+  font-weight: 800;
+}
+
+.role-card span {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--slate-600);
+}
+
+/* ---------- Analytics ---------- */
+.analytics-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 940px) {
+  .analytics-layout { grid-template-columns: 1fr; }
+}
+
+.analytics-subhead {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.analytics-copy p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 1.5rem;
+}
+
+.model-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.model-stats div {
+  padding: 0.85rem 0.5rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-align: center;
+}
+
+.model-stats strong {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--cyan-300);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.model-stats span {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 560px) {
+  .model-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+.analytics-note {
+  font-size: 0.84rem !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  border-left: 2px solid rgba(6, 182, 212, 0.45);
+  padding-left: 0.9rem;
+}
+
+.analytics-cta {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/* ---------- Analytics: risk preview panel ---------- */
+.risk-preview {
+  padding: 1.4rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55), 0 0 40px -18px var(--cyan-glow);
+}
+
+.risk-preview-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.risk-preview-eyebrow {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
+.risk-preview-patient {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  margin-top: 0.15rem;
+}
+
+.risk-preview-score { text-align: right; flex-shrink: 0; }
+
+.risk-preview-score strong {
+  display: block;
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--risk-high);
+  font-variant-numeric: tabular-nums;
+}
+
+.risk-preview-score span {
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--risk-high);
+}
+
+.risk-preview-factors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.risk-preview-factors li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 0.5rem 0.6rem;
+  font-size: 0.78rem;
+  align-items: baseline;
+}
+
+.rp-points {
+  font-weight: 800;
+  color: var(--risk-high);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-label { font-weight: 700; color: var(--navy-900); }
+
+.rp-detail {
+  grid-column: 2;
+  color: var(--slate-500);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.risk-preview-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--slate-200);
+}
+
+.rp-bar-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  margin-bottom: 0.2rem;
+}
+
+.rp-bar-head span:last-child { font-variant-numeric: tabular-nums; color: var(--navy-900); }
+
+.rp-bar-track {
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--slate-200);
+  overflow: hidden;
+}
+
+.rp-bar-track span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--teal-600), var(--cyan-500));
+}
+
+.risk-preview-foot {
+  margin-top: 0.9rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--slate-200);
+  font-size: 0.7rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--slate-500);
+}
+
+/* ---------- Resources: horizontal rail ---------- */
+.resource-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(258px, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.25rem 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.resource-rail::-webkit-scrollbar { height: 7px; }
+.resource-rail::-webkit-scrollbar-track { background: rgba(148,163,184,0.16); border-radius: var(--radius-pill); }
+.resource-rail::-webkit-scrollbar-thumb { background: rgba(13,148,136,0.45); border-radius: var(--radius-pill); }
+.resource-rail::-webkit-scrollbar-thumb:hover { background: var(--teal-600); }
+
+.resource-card {
+  scroll-snap-align: start;
+  display: block;
+  padding: 1.3rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-card);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--glass-border-cyan);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.resource-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.22);
+  color: var(--teal-700);
+  margin-bottom: 0.85rem;
+}
+
+.resource-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy-900);
+  margin-bottom: 0.35rem;
+}
+
+.resource-card h3 svg { color: var(--slate-400); transition: var(--transition-fast); }
+.resource-card:hover h3 svg { color: var(--teal-600); transform: translate(2px, -2px); }
+
+.resource-card p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--slate-600);
+}
+
+.rail-hint {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--slate-400);
+  margin-top: 0.25rem;
+}
+
+/* ---------- Footer ---------- */
+.landing-footer {
+  padding: 2.5rem 0;
+  background: rgba(10, 25, 47, 0.96);
+  border-top: 1px solid rgba(6, 182, 212, 0.22);
+}
+
+.landing-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.landing-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.landing-footer-brand svg { color: var(--cyan-400); }
+
+.landing-footer p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 52ch;
+}
+
+.landing-footer-links {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.landing-footer-links a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.landing-footer-links a:hover { color: var(--cyan-300); }
+
+@media (max-width: 720px) {
+  .landing-section { padding: 3.25rem 0; }
+  .section-inner { padding: 0 1.25rem; }
+  .hero-top-nav { padding: 0.9rem 1.25rem; }
+  .hero-nav-links { display: none; }
+}
+
+/* The scroll cue sits below the pill row, so reclaim some of the original
+   bottom padding to keep the hero balanced within one viewport. */
+.landing-page .hero-bottom-pills { padding-bottom: 1.25rem; }

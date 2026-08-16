@@ -58,3 +58,6 @@
   --info-500: #3B82F6;
   --info-bg: rgba(59, 130, 246, 0.10);
 }
+
+/* Height of the sticky public nav — used for hero sizing and scroll offsets */
+:root { --nav-h: 84px; }
