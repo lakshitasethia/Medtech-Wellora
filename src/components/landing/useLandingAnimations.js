@@ -13,52 +13,102 @@ gsap.registerPlugin(ScrollTrigger);
  *    before it is close enough to read.
  *  - Honours prefers-reduced-motion by not animating at all.
  *
- * SAFETY: animations are opt-in on proof that animation is possible.
- * `gsap.from()` paints its start state — opacity 0 — the moment it is
- * created, and relies on the ticker to bring content back. If the ticker
- * never advances (starved rAF, headless browser, a throttled background
- * tab) the page is silently blank. So we wait for one real animation frame
- * before creating a single tween. If that frame never arrives, nothing is
- * ever hidden and the page renders as plain static HTML — the correct
- * failure mode for marketing copy.
+ * ── Why this is defensive ────────────────────────────────────────────
+ * `gsap.from()` paints its start state (opacity 0) the instant it is
+ * created and relies on the ticker to bring content back. Anything that
+ * interrupts the tween — a starved rAF, a StrictMode remount landing
+ * mid-flight, a killed context — leaves that element permanently
+ * invisible. This bit the hero CTA, pill row and scroll cue in practice:
+ * the undelayed tweens completed, the delayed ones did not.
  *
- * Landing page only. The dashboards have no motion by design: clinical
+ * Three independent guarantees now prevent a blank hero:
+ *   1. Motion only starts once a real animation frame has fired.
+ *   2. Every tween clears its own inline styles on completion.
+ *   3. A watchdog force-reveals anything still hidden after 2.5s, using
+ *      plain DOM writes so it works even if GSAP itself is wedged.
+ *
+ * Landing page only. Dashboards have no motion by design — clinical
  * screens should not animate while someone is reading them.
+ * ─────────────────────────────────────────────────────────────────────
  */
+
+const ANIM_SELECTOR = '[data-anim]';
+
+/** Strip any inline state, without depending on GSAP being healthy. */
+function forceReveal(root = document) {
+  root.querySelectorAll(ANIM_SELECTOR).forEach((el) => {
+    const s = el.style;
+    s.removeProperty('opacity');
+    s.removeProperty('transform');
+    s.removeProperty('translate');
+    s.removeProperty('rotate');
+    s.removeProperty('scale');
+    s.removeProperty('visibility');
+  });
+}
+
 export function useLandingAnimations(enabled = true) {
   useEffect(() => {
     if (!enabled) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      forceReveal();
+      return;
+    }
 
     let ctx;
     let disposed = false;
 
-    // The liveness probe. Only inside this callback do we touch the DOM.
+    /* Guarantee 3 — scoped to the hero, which animates on load and must be
+       readable within a second. Below-fold sections are deliberately excluded:
+       they are supposed to still be hidden at this point, waiting for their
+       scroll trigger. Revealing those early would defeat the effect rather
+       than rescue it. */
+    const watchdog = setTimeout(() => {
+      if (disposed) return;
+      const hero = document.querySelector('.hero-landing-container');
+      if (!hero) return;
+      const stuck = [...hero.querySelectorAll(ANIM_SELECTOR)]
+        .filter((el) => parseFloat(getComputedStyle(el).opacity) < 0.99);
+      if (!stuck.length) return;
+      console.warn(`[Wellora] ${stuck.length} hero element(s) never resolved — revealing`);
+      forceReveal(hero);
+    }, 2500);
+
+    // Guarantee 1 — only animate once we know frames are actually running.
     const frame = requestAnimationFrame(() => {
       if (disposed) return;
 
       ctx = gsap.context(() => {
-        /* ---- Hero: one staged entrance on load ---- */
-        gsap.from('[data-anim="hero-title"]', {
-          opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
-        });
-        gsap.from('[data-anim="hero-sub"]', {
-          opacity: 0, y: 16, duration: 0.7, ease: 'power2.out', delay: 0.12,
-        });
-        gsap.from('[data-anim="hero-cta"]', {
-          opacity: 0, y: 14, duration: 0.6, ease: 'power2.out', delay: 0.22,
-        });
-        gsap.from('[data-anim="hero-pill"]', {
-          opacity: 0, y: 12, duration: 0.5, ease: 'power2.out', delay: 0.3, stagger: 0.07,
-        });
-        gsap.from('[data-anim="scroll-cue"]', {
-          opacity: 0, duration: 0.6, ease: 'power1.out', delay: 0.6,
+        /* Guarantee 2 — `set` + `to`, never `from`.
+           A `from()` tween stores its start state and re-applies it whenever
+           GSAP re-renders the tween, which `ScrollTrigger.refresh()` does.
+           That is what pulled the hero headline back to opacity 0.19 after a
+           scroll: the animation had finished, then a refresh rewound it. A
+           `to()` tween only ever moves toward the end state, and clearProps
+           removes the inline styles afterwards so a later refresh has nothing
+           left to act on. */
+        const heroTargets = [
+          '[data-anim="hero-title"]', '[data-anim="hero-sub"]',
+          '[data-anim="hero-cta"]', '[data-anim="hero-pill"]',
+          '[data-anim="scroll-cue"]',
+        ];
+        gsap.set(heroTargets, { opacity: 0, y: 16 });
+
+        const hero = gsap.timeline({
+          defaults: { ease: 'power2.out', clearProps: 'opacity,transform' },
         });
 
-        /* ---- Hero background: light parallax ----
-           The photograph is a fixed body background, so it moves via
-           background-position rather than transform. 8% of travel across a
-           viewport — enough to read as depth, not enough to notice. */
+        hero
+          .to('[data-anim="hero-title"]', { opacity: 1, y: 0, duration: 0.8 })
+          .to('[data-anim="hero-sub"]',   { opacity: 1, y: 0, duration: 0.7 }, '-=0.62')
+          .to('[data-anim="hero-cta"]',   { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
+          .to('[data-anim="hero-pill"]',  { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, '-=0.42')
+          .to('[data-anim="scroll-cue"]', { opacity: 1, y: 0, duration: 0.5 }, '-=0.3');
+
+        /* Hero background parallax. The photograph is a fixed body
+           background, so it moves via background-position rather than
+           transform. 8% of travel across a viewport — depth, not motion. */
         gsap.to('body', {
           backgroundPositionY: '8%',
           ease: 'none',
@@ -70,21 +120,25 @@ export function useLandingAnimations(enabled = true) {
           },
         });
 
-        /* ---- Sections: fade and short rise on entry ---- */
+        /* Sections: fade and short rise on entry — same set/to pattern, for
+           the same reason. `once: true` means each section reveals a single
+           time and then keeps its natural styles. */
         gsap.utils.toArray('[data-anim="section"]').forEach((section) => {
-          const targets = section.querySelectorAll('[data-anim="rise"]');
-          gsap.from(targets.length ? targets : section, {
-            opacity: 0,
-            y: 24,
+          const found = section.querySelectorAll('[data-anim="rise"]');
+          const targets = found.length ? Array.from(found) : [section];
+          gsap.set(targets, { opacity: 0, y: 24 });
+          gsap.to(targets, {
+            opacity: 1,
+            y: 0,
             duration: 0.7,
             ease: 'power2.out',
             stagger: 0.08,
+            clearProps: 'opacity,transform',
             scrollTrigger: { trigger: section, start: 'top 85%', once: true },
           });
         });
       });
 
-      // ScrollTrigger measures on creation; late-loading fonts shift layout.
       if (document.fonts?.ready) {
         document.fonts.ready.then(() => !disposed && ScrollTrigger.refresh());
       }
@@ -93,7 +147,10 @@ export function useLandingAnimations(enabled = true) {
     return () => {
       disposed = true;
       cancelAnimationFrame(frame);
+      clearTimeout(watchdog);
       ctx?.revert();
+      // A remount must never leave the previous pass's start state painted.
+      forceReveal();
     };
   }, [enabled]);
 }
