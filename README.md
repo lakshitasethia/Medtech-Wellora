@@ -14,7 +14,9 @@ rather than by the browser.
 
 <br/>
 
-### **[ Live risk model API → ](https://wellora-ml.onrender.com/docs)**
+### **[ Experience Wellora live → ](https://medtech-wellora.vercel.app)**
+
+<sub>[Live risk model API →](https://wellora-ml.onrender.com/docs)</sub>
 
 <br/>
 
@@ -24,7 +26,7 @@ rather than by the browser.
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-1f1f1f?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11-1f1f1f?style=flat-square)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-1f1f1f?style=flat-square)
-![ML API](https://img.shields.io/badge/ML_API-live-0D9488?style=flat-square)
+![Status](https://img.shields.io/badge/status-live-0D9488?style=flat-square)
 
 </div>
 
@@ -471,7 +473,7 @@ assessment.
 | ML API | FastAPI 0.115, Uvicorn, Pydantic | `/predict` · `/health` · `/model-info` |
 | ML | scikit-learn 1.6.1, numpy 1.26.4, pandas 2.2.3 | Logistic regression, exact explanations |
 | Dataset | UCI Heart Disease (Cleveland) | 303 records |
-| Hosting | Render · Supabase | ML API · data platform |
+| Hosting | Vercel · Render · Supabase | Frontend · ML API · data platform |
 
 No message broker, no vector database, no LLM, no embedding search. Matching is identifier- and
 threshold-based throughout.
@@ -539,6 +541,8 @@ Where something is incomplete it is stated below rather than omitted.
 | Append-only guarantee | 0 UPDATE and 0 DELETE policies on `clinical_events` |
 | RLS enforcement | Anonymous requests to `patients`, `lab_results`, `clinical_events` all return `[]` |
 | Frontend build | Clean · lint clean |
+| Deployed frontend | Live on Vercel — SPA deep links, auth guard and security headers verified |
+| Cross-origin ML calls | Preflight returns `access-control-allow-origin` for the production domain; unknown origins rejected |
 | Cross-role realtime | Verified end to end — nurse writes vitals, doctor's worklist re-ranks and timeline updates |
 
 ---
@@ -566,9 +570,8 @@ Stated plainly, because a system that hides these is harder to trust than one th
 
 **Engineering**
 
-- **The frontend is not deployed.** The ML API is live on Render; the React application currently runs locally.
-- **`ALLOWED_ORIGINS` is localhost-only** on the deployed API and must be updated when the frontend ships,
-  or the browser will block every call.
+- **Only the production Vercel domain is CORS-allowed** on the ML API. Vercel preview deployments get their
+  own URLs, so the risk modal shows the fallback badge on previews — demo from the production URL.
 - **Free-tier cold start.** The ML service sleeps after inactivity; the first request takes ~50 seconds, during
   which the UI correctly shows the fallback badge.
 - **Two Admin tabs are static.** Capacity and Permissions still carry placeholder figures.
@@ -609,6 +612,6 @@ able to explain itself.**
 
 <br/>
 
-### **[ Live risk model API → ](https://wellora-ml.onrender.com/docs)**
+### **[ Experience Wellora live → ](https://medtech-wellora.vercel.app)**
 
 </div>
